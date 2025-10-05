@@ -1,0 +1,203 @@
+export interface Product {
+  id: string
+  name: string
+  price: number
+  maker: string
+  description: string
+  images: string[]
+  stock: number
+  category: string
+  specs: string[]
+}
+
+export const products: Product[] = [
+  {
+    id: "1",
+    name: "Samsung Double Door Refrigerator 350L",
+    price: 899.99,
+    maker: "Samsung",
+    description: "Energy-efficient double door refrigerator with digital inverter technology and frost-free operation.",
+    images: ["/samsung-double-door-refrigerator-front-view.jpg", "/samsung-refrigerator-interior-shelves.jpg", "/samsung-refrigerator-side-view.jpg"],
+    stock: 25,
+    category: "Refrigerators",
+    specs: ["350L capacity", "Digital inverter", "Frost-free", "A+ energy rating"],
+  },
+  {
+    id: "2",
+    name: "Dyson Tower Fan with Remote",
+    price: 349.99,
+    maker: "Dyson",
+    description: "Bladeless tower fan with air multiplier technology and sleep timer function.",
+    images: ["/dyson-bladeless-tower-fan.jpg", "/dyson-fan-remote-control.jpg", "/dyson-fan-oscillating.jpg"],
+    stock: 45,
+    category: "Fans",
+    specs: ["Bladeless design", "Remote control", "10 speed settings", "Oscillation"],
+  },
+  {
+    id: "3",
+    name: "Honda Portable Generator 5.5KVA",
+    price: 1499.99,
+    maker: "Honda",
+    description: "Reliable portable generator with electric start and fuel-efficient engine.",
+    images: ["/honda-portable-generator-red.jpg", "/honda-generator-control-panel.jpg", "/honda-generator-side-view-with-wheels.jpg"],
+    stock: 12,
+    category: "Generators",
+    specs: ["5.5KVA output", "Electric start", "8 hours runtime", "Low noise"],
+  },
+  {
+    id: "4",
+    name: "Philips High-Speed Blender 2L",
+    price: 129.99,
+    maker: "Philips",
+    description: "Powerful blender with ProBlend technology for smooth blending results.",
+    images: ["/philips-blender-with-glass-jar.jpg", "/philips-blender-blades-closeup.jpg", "/philips-blender-control-buttons.jpg"],
+    stock: 68,
+    category: "Blenders",
+    specs: ["2L capacity", "1000W motor", "6 blades", "Pulse function"],
+  },
+  {
+    id: "5",
+    name: "LG Inverter Air Conditioner 1.5HP",
+    price: 749.99,
+    maker: "LG",
+    description: "Energy-saving inverter AC with fast cooling and air purification filter.",
+    images: ["/lg-white-air-conditioner-unit.jpg", "/lg-ac-remote-control.jpg", "/lg-air-conditioner-filter.jpg"],
+    stock: 18,
+    category: "Air Conditioners",
+    specs: ["1.5HP", "Inverter technology", "R410A refrigerant", "Remote control"],
+  },
+  {
+    id: "6",
+    name: "Bosch Front Load Washing Machine 8KG",
+    price: 649.99,
+    maker: "Bosch",
+    description: "Efficient front-load washer with multiple wash programs and quick wash option.",
+    images: [
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+    ],
+    stock: 22,
+    category: "Washing Machines",
+    specs: ["8KG capacity", "15 programs", "1400 RPM spin", "A+++ rated"],
+  },
+  {
+    id: "7",
+    name: "Panasonic Microwave Oven 32L",
+    price: 189.99,
+    maker: "Panasonic",
+    description: "Convection microwave with grill function and auto-cook menus.",
+    images: [
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+    ],
+    stock: 54,
+    category: "Microwaves",
+    specs: ["32L capacity", "1000W power", "Convection mode", "Auto-cook menus"],
+  },
+  {
+    id: "8",
+    name: "Hisense Smart TV 55 Inch 4K",
+    price: 599.99,
+    maker: "Hisense",
+    description: "Ultra HD smart TV with HDR support and built-in streaming apps.",
+    images: [
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+    ],
+    stock: 31,
+    category: "Televisions",
+    specs: ["55 inch", "4K UHD", "HDR10", "Smart OS", "3 HDMI ports"],
+  },
+  {
+    id: "9",
+    name: "Kenwood Stand Mixer 1000W",
+    price: 279.99,
+    maker: "Kenwood",
+    description: "Professional stand mixer with planetary mixing action and multiple attachments.",
+    images: [
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+    ],
+    stock: 38,
+    category: "Kitchen Appliances",
+    specs: ["1000W motor", "5L bowl", "6 speeds", "Dough hook included"],
+  },
+  {
+    id: "10",
+    name: "Binatone Rechargeable Fan 18 Inch",
+    price: 89.99,
+    maker: "Binatone",
+    description: "Portable rechargeable fan with LED light and USB charging port.",
+    images: [
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+    ],
+    stock: 92,
+    category: "Fans",
+    specs: ["18 inch", "Rechargeable battery", "LED light", "12 hours backup"],
+  },
+  {
+    id: "11",
+    name: "Thermocool Deep Freezer 300L",
+    price: 549.99,
+    maker: "Thermocool",
+    description: "Large capacity chest freezer with fast freeze function and lock system.",
+    images: [
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+    ],
+    stock: 16,
+    category: "Freezers",
+    specs: ["300L capacity", "Fast freeze", "Lock & key", "Low power consumption"],
+  },
+  {
+    id: "12",
+    name: "Tefal Electric Kettle 1.7L",
+    price: 45.99,
+    maker: "Tefal",
+    description: "Stainless steel electric kettle with rapid boil and auto shut-off.",
+    images: [
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+      "/placeholder.svg?height=600&width=600",
+    ],
+    stock: 0,
+    category: "Kitchen Appliances",
+    specs: ["1.7L capacity", "2200W", "Stainless steel", "Auto shut-off"],
+  },
+]
+
+export const categories = [
+  "All Categories",
+  "Refrigerators",
+  "Fans",
+  "Generators",
+  "Blenders",
+  "Air Conditioners",
+  "Washing Machines",
+  "Microwaves",
+  "Televisions",
+  "Kitchen Appliances",
+  "Freezers",
+]
+
+export const makers = [
+  "Samsung",
+  "Dyson",
+  "Honda",
+  "Philips",
+  "LG",
+  "Bosch",
+  "Panasonic",
+  "Hisense",
+  "Kenwood",
+  "Binatone",
+  "Thermocool",
+  "Tefal",
+]
