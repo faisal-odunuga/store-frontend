@@ -77,9 +77,15 @@ const Header = () => {
                         <span className='text-sm font-medium text-muted-foreground'>
                           Signed in as {user.name}
                         </span>
-                        <Button variant='outline' className='w-full justify-start' onClick={logout}>
-                          Logout
-                        </Button>
+                        {user.role !== 'ADMIN' && (
+                          <Button
+                            variant='outline'
+                            className='w-full justify-start'
+                            onClick={logout}
+                          >
+                            Logout
+                          </Button>
+                        )}
                       </div>
                     ) : (
                       <div className='flex flex-col gap-2'>
