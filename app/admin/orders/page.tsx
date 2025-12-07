@@ -1,154 +1,120 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { orders, type Order, type OrderStatus } from "@/lib/orders"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Package, Clock, Truck, CheckCircle, XCircle } from "lucide-react"
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import apiService from '@/lib/apiService';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
+import { toast } from 'sonner';
+import { Order } from '@/lib/definitions';
+import { format } from 'date-fns';
 
-const statusConfig = {
-  pending: { label: "Pending", icon: Clock, color: "bg-yellow-500" },
-  processing: { label: "Processing", icon: Package, color: "bg-blue-500" },
-  shipped: { label: "Shipped", icon: Truck, color: "bg-purple-500" },
-  delivered: { label: "Delivered", icon: CheckCircle, color: "bg-green-500" },
-  cancelled: { label: "Cancelled", icon: XCircle, color: "bg-red-500" },
-}
+export default function AdminOrdersPage() {
+  const queryClient = useQueryClient();
+  const { data: orders = [], isLoading } = useQuery({
+    queryKey: ['admin-orders'],
+    queryFn: apiService.orders.getAllOrders,
+    select: (data) => data.data.orders,
+  });
 
-export default function OrdersPage() {
-  const [orderList, setOrderList] = useState<Order[]>(orders)
-  const [filterStatus, setFilterStatus] = useState<string>("all")
+  const handleStatusChange = (id: string, status: string) => {
+    mutate({ id, status });
+  };
 
-  const filteredOrders = filterStatus === "all" ? orderList : orderList.filter((order) => order.status === filterStatus)
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'PENDING':
+        return 'bg-yellow-500';
+      case 'PROCESSING':
+        return 'bg-blue-500';
+      case 'SHIPPED':
+        return 'bg-purple-500';
+      case 'DELIVERED':
+        return 'bg-green-500';
+      case 'CANCELLED':
+        return 'bg-red-500';
+      default:
+        return 'bg-gray-500';
+    }
+  };
 
-  const updateOrderStatus = (orderId: string, newStatus: OrderStatus) => {
-    setOrderList((prev) =>
-      prev.map((order) => (order.id === orderId ? { ...order, status: newStatus, updatedAt: new Date() } : order)),
-    )
-  }
-
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    }).format(date)
-  }
+  if (isLoading) return <div>Loading orders...</div>;
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-balance">Recent Orders</h1>
-          <p className="text-muted-foreground mt-1">Manage and track customer orders</p>
-        </div>
-        <Select value={filterStatus} onValueChange={setFilterStatus}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Filter by status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Orders</SelectItem>
-            <SelectItem value="pending">Pending</SelectItem>
-            <SelectItem value="processing">Processing</SelectItem>
-            <SelectItem value="shipped">Shipped</SelectItem>
-            <SelectItem value="delivered">Delivered</SelectItem>
-            <SelectItem value="cancelled">Cancelled</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="grid gap-4">
-        {filteredOrders.length === 0 ? (
-          <Card>
-            <CardContent className="flex items-center justify-center py-12">
-              <p className="text-muted-foreground">No orders found</p>
-            </CardContent>
-          </Card>
-        ) : (
-          filteredOrders.map((order) => {
-            const StatusIcon = statusConfig[order.status].icon
-            return (
-              <Card key={order.id}>
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-1">
-                      <CardTitle className="flex items-center gap-2">
-                        Order {order.id}
-                        <Badge variant="secondary" className={`${statusConfig[order.status].color} text-white`}>
-                          <StatusIcon className="w-3 h-3 mr-1" />
-                          {statusConfig[order.status].label}
-                        </Badge>
-                      </CardTitle>
-                      <div className="text-sm text-muted-foreground space-y-1">
-                        <p className="font-medium text-foreground">{order.customerName}</p>
-                        <p>{order.customerEmail}</p>
-                        <p>{order.customerPhone}</p>
-                        <p className="text-xs">Ordered: {formatDate(order.createdAt)}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-primary">${order.total.toFixed(2)}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{order.items.length} item(s)</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium">Shipping Address:</p>
-                    <p className="text-sm text-muted-foreground">{order.shippingAddress}</p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium">Order Items:</p>
-                    <div className="space-y-2">
-                      {order.items.map((item, index) => (
-                        <div key={index} className="flex items-center gap-3 p-2 rounded-lg bg-muted/50">
-                          <img
-                            src={item.image || "/placeholder.svg"}
-                            alt={item.productName}
-                            className="w-12 h-12 object-cover rounded"
-                          />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium truncate">{item.productName}</p>
-                            <p className="text-xs text-muted-foreground">
-                              Qty: {item.quantity} × ${item.price}
-                            </p>
-                          </div>
-                          <p className="text-sm font-medium">${(item.quantity * item.price).toFixed(2)}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 pt-2">
-                    <Select
-                      value={order.status}
-                      onValueChange={(value) => updateOrderStatus(order.id, value as OrderStatus)}
-                    >
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="processing">Processing</SelectItem>
-                        <SelectItem value="shipped">Shipped</SelectItem>
-                        <SelectItem value="delivered">Delivered</SelectItem>
-                        <SelectItem value="cancelled">Cancelled</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Button variant="outline" size="sm">
-                      View Details
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )
-          })
-        )}
+    <div className='space-y-6'>
+      <h1 className='text-3xl font-bold'>Orders Management</h1>
+      <div className='rounded-md border bg-card overflow-x-auto'>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Order ID</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>Customer</TableHead>
+              <TableHead>Total</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {orders.map((order) => (
+              <TableRow key={order.id}>
+                <TableCell className='font-mono text-xs'>{order.id.slice(0, 8)}...</TableCell>
+                <TableCell>
+                  {order.createdAt ? format(new Date(order.createdAt), 'MMM dd, yyyy') : 'N/A'}
+                </TableCell>
+                <TableCell>{order.user.name}</TableCell>
+                <TableCell>${order.totalAmount.toLocaleString()}</TableCell>
+                <TableCell>
+                  <Badge
+                    className={`${getStatusColor(order.status)} text-white hover:${getStatusColor(
+                      order.status
+                    )}`}
+                  >
+                    {order.status}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Select
+                    defaultValue={order.status}
+                    onValueChange={(value) => handleStatusChange(order.id, value)}
+                  >
+                    <SelectTrigger className='w-[140px]'>
+                      <SelectValue placeholder='Status' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value='PENDING'>Pending</SelectItem>
+                      <SelectItem value='PROCESSING'>Processing</SelectItem>
+                      <SelectItem value='SHIPPED'>Shipped</SelectItem>
+                      <SelectItem value='DELIVERED'>Delivered</SelectItem>
+                      <SelectItem value='CANCELLED'>Cancelled</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </TableCell>
+              </TableRow>
+            ))}
+            {orders.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={6} className='text-center h-24'>
+                  No orders found.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
       </div>
     </div>
-  )
+  );
 }

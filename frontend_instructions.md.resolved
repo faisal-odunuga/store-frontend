@@ -1,0 +1,133 @@
+# Frontend Build Instructions
+
+**Base URL**: `http://localhost:8080/api/v1`
+
+## 1. Authentication & Security (CRITICAL)
+- **Mechanism**: HTTP-Only Cookies.
+- **Client Configuration**: You **MUST** set `credentials: 'include'` (or `withCredentials: true` for axios) in ALL requests.
+- **Token Storage**: The browser handles the cookie. Do **NOT** look for a token in the response body.
+- **Verification**: To check if a user is logged in, call `GET /auth/me`. If it returns 200, the user is authenticated. If 401, they are not.
+
+## 2. API Response Wrapper
+All successful responses follow this structure:
+```typescript
+interface ApiResponse<T> {
+  status: "Success";
+  message?: string;
+  data: T;
+}
+```
+
+All error responses follow this structure:
+```typescript
+interface ApiError {
+  status: "fail" | "error";
+  message: string;
+}
+```
+
+## 3. Endpoints & Payloads
+
+### Auth Module
+#### Signup
+- **POST** `/auth/signup`
+- **Payload**:
+  ```typescript
+  {
+    name: string;      // min 2 chars
+    email: string;     // valid email
+    password: string;  // min 6 chars
+    phone?: string;    // exactly 11 digits
+    address?: string;
+  }
+  ```
+- **Response**: `{ data: { user: User } }`
+
+#### Login
+- **POST** `/auth/login`
+- **Payload**:
+  ```typescript
+  {
+    email: string;
+    password: string;
+  }
+  ```
+- **Response**: `{ data: { user: User } }` (Cookie is set automatically)
+
+#### Checks
+- **GET** `/auth/me`
+- **Response**: `{ data: { user: User } }`
+
+#### Password Management
+- **PATCH** `/auth/forgot-password`: `{ email: string }`
+- **PATCH** `/auth/reset-password/:token`: `{ password: string }`
+- **PATCH** `/auth/change-password` (Logged in): `{ oldPassword: string, newPassword: string }`
+
+### Product Module
+- **GET** `/products`
+  - Query Params: `page`, `limit`, `search`, `category`, `sort` ("price_asc", "price_desc").
+- **GET** `/products/:id`
+- **POST** `/products` (Admin Only)
+  - Content-Type: `multipart/form-data`
+  - Fields: `name`, `description`, `price` (number), `stock` (integer), `category`, `image` (File).
+
+### Cart Module
+- **POST** `/cart`: `{ productId: string, quantity: number }`
+- **GET** `/cart`
+
+### Order Module
+- **POST** `/orders`: (No payload, uses Cart)
+- **GET** `/orders`: User history.
+- **GET** `/orders/all-orders` (Admin): Platform history.
+- **PATCH** `/orders/:id` (Admin):
+  - Payload: `{ status: "PENDING" | "PROCESSING" | "SHIPPED" | "DELIVERED" | "CANCELLED" }`
+
+### Payment Module (Paystack)
+1. **Initialize**: `POST /payments/initialize`
+   - Payload: `{ orderId: string }`
+   - Response: `{ data: { authorization_url: string, reference: string } }`
+   - **Step**: Redirect window to `authorization_url`.
+2. **Verify**: `GET /payments/verify?reference=...`
+
+### Reviews Module
+- **POST** `/reviews`
+  - Payload: `{ productId: string, rating: number (1-5), comment?: string }`
+- **GET** `/reviews/:productId`
+
+### Admin Dashboard
+- **GET** `/stats/dashboard` (Admin)
+  - Response: `{ data: { users: number, orders: number, products: number, revenue: number } }`
+
+## 4. TypeScript Interfaces
+
+```typescript
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: "CUSTOMER" | "ADMIN";
+  phone?: string;
+  address?: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  imageUrl?: string;
+  category: string;
+}
+
+interface CartItem {
+  id: string;
+  quantity: number;
+  product: Product;
+}
+```
+
+## 5. UI Suggestions
+- **Login/Signup**: Use a Formik/React Hook Form with Zod validation matching the schemas above.
+- **Protected Routes**: Create a `RequireAuth` component that calls `/auth/me`. If it fails, redirect to Login.
+- **Admin**: Check `user.role === 'ADMIN'` before showing Admin links.
