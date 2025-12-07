@@ -32,12 +32,12 @@ const Header = () => {
               <Link href='/' className='text-sm font-medium hover:text-primary transition-colors'>
                 Shop
               </Link>
-              {user?.role === 'ADMIN' && (
+              {user && (
                 <Link
-                  href='/admin'
+                  href='/settings'
                   className='text-sm font-medium hover:text-primary transition-colors'
                 >
-                  Admin
+                  Settings
                 </Link>
               )}
             </nav>
@@ -62,13 +62,13 @@ const Header = () => {
                   >
                     Shop
                   </Link>
-                  {user?.role === 'ADMIN' && (
+                  {user && (
                     <Link
-                      href='/admin'
+                      href='/settings'
                       className='text-lg font-medium hover:text-primary transition-colors'
                       onClick={() => setIsOpen(false)}
                     >
-                      Admin
+                      Settings
                     </Link>
                   )}
                   <div className='border-t pt-4 mt-2'>
@@ -77,15 +77,9 @@ const Header = () => {
                         <span className='text-sm font-medium text-muted-foreground'>
                           Signed in as {user.name}
                         </span>
-                        {user.role !== 'ADMIN' && (
-                          <Button
-                            variant='outline'
-                            className='w-full justify-start'
-                            onClick={logout}
-                          >
-                            Logout
-                          </Button>
-                        )}
+                        <Button variant='outline' className='w-full justify-start' onClick={logout}>
+                          Logout
+                        </Button>
                       </div>
                     ) : (
                       <div className='flex flex-col gap-2'>
@@ -115,11 +109,9 @@ const Header = () => {
               {user ? (
                 <div className='flex items-center gap-4'>
                   <span className='text-sm font-medium'>Hi, {user.name}</span>
-                  {user.role !== 'ADMIN' && (
-                    <Button variant='ghost' size='sm' onClick={logout}>
-                      Logout
-                    </Button>
-                  )}
+                  <Button variant='ghost' size='sm' onClick={logout}>
+                    Logout
+                  </Button>
                 </div>
               ) : (
                 <div className='flex items-center gap-2'>
@@ -133,7 +125,7 @@ const Header = () => {
               )}
             </div>
 
-            {user?.role !== 'ADMIN' && (
+            {user && (
               <Button variant='outline' size='icon' asChild>
                 <Link href='/cart'>
                   <ShoppingCart className='h-5 w-5' />

@@ -52,7 +52,7 @@ export default function SignupForm() {
     mutationFn: apiService.auth.signup,
     onSuccess: (data) => {
       toast.success('Account created successfully');
-      queryClient.setQueryData(['auth-user'], { data });
+      queryClient.setQueryData(['auth-user'], data);
       queryClient.invalidateQueries({ queryKey: ['auth-user'] });
       router.push('/');
     },

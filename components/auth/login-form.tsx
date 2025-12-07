@@ -44,11 +44,12 @@ export default function LoginForm() {
     mutationFn: apiService.auth.login,
     onSuccess: (data) => {
       toast.success('Logged in successfully');
-      queryClient.setQueryData(['auth-user'], { data }); // Optimistically update auth state
+      queryClient.setQueryData(['auth-user'], data); // Optimistically update auth state
       queryClient.invalidateQueries({ queryKey: ['auth-user'] }); // Ensure fresh data
       router.push(redirect);
     },
     onError: (error: any) => {
+      console.error('LOGIN ERROR DETAILS:', error);
       toast.error(error?.response?.data?.message || 'Failed to login');
     },
   });

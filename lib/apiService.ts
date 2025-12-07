@@ -89,14 +89,6 @@ const apiService = {
       const res = await api.get<ApiResponse<{ orders: Order[] }>>('/orders');
       return res.data;
     },
-    getAllOrders: async () => {
-      const res = await api.get<ApiResponse<{ orders: Order[] }>>('/orders/all-orders');
-      return res.data;
-    },
-    updateStatus: async (id: string, status: string) => {
-      const res = await api.patch(`/orders/${id}`, { status });
-      return res.data;
-    },
   },
   payment: {
     initialize: async (orderId: string) => {
@@ -117,12 +109,6 @@ const apiService = {
     },
     getByProduct: async (productId: string) => {
       const res = await api.get(`/reviews/${productId}`);
-      return res.data;
-    },
-  },
-  admin: {
-    getStats: async () => {
-      const res = await api.get<ApiResponse<StatsResponse>>('/stats/dashboard');
       return res.data;
     },
   },
