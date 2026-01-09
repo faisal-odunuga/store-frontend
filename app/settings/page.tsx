@@ -79,7 +79,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className='container max-w-4xl mx-auto px-4 py-8'>
+    <div className='container mx-auto max-w-4xl mx-auto px-4 py-8'>
       <div className='space-y-6'>
         <div>
           <h1 className='text-3xl font-bold'>Settings</h1>

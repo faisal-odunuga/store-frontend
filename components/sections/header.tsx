@@ -10,7 +10,23 @@ import {
   SheetTitle,
   SheetDescription,
 } from '@/components/ui/sheet';
-import { ShoppingCart, Menu } from 'lucide-react';
+import {
+  ShoppingCart,
+  Menu,
+  User as UserIcon,
+  LogOut,
+  Package,
+  Settings,
+  ChevronDown,
+} from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { useCart } from '@/lib/cart';
 import { useAuth } from '@/lib/auth-context';
 
@@ -29,20 +45,60 @@ const Header = () => {
               ElectroStore
             </Link>
             <nav className='hidden md:flex items-center gap-6'>
-              <Link href='/' className='text-sm font-medium hover:text-primary transition-colors'>
+              <Link
+                href='/products'
+                className='text-sm font-medium hover:text-primary transition-colors'
+              >
                 Shop
               </Link>
-              {user && (
-                <Link
-                  href='/settings'
-                  className='text-sm font-medium hover:text-primary transition-colors'
-                >
-                  Settings
-                </Link>
-              )}
             </nav>
           </div>
           <div className='flex items-center gap-3 relative'>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant='ghost' size='sm' className='gap-2 pl-0 md:pl-4'>
+                    <UserIcon className='h-5 w-5 md:h-4 md:w-4' />
+                    <span className='hidden md:block max-w-[100px] truncate'>{user.name}</span>
+                    <ChevronDown className='hidden md:block h-3 w-3 opacity-50' />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align='end' className='w-56'>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href='/orders' className='cursor-pointer'>
+                      <Package className='nr-2 h-4 w-4 mr-2' />
+                      <span>My Orders</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href='/settings' className='cursor-pointer'>
+                      <Settings className='nr-2 h-4 w-4 mr-2' />
+                      <span>Settings</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={logout}
+                    className='text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer'
+                  >
+                    <LogOut className='nr-2 h-4 w-4 mr-2' />
+                    <span>Logout</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className='hidden md:flex items-center gap-2'>
+                <Button variant='ghost' size='sm' asChild>
+                  <Link href='/auth/login'>Login</Link>
+                </Button>
+                <Button size='sm' asChild>
+                  <Link href='/auth/signup'>Sign Up</Link>
+                </Button>
+              </div>
+            )}
+
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant='ghost' size='icon' className='md:hidden'>
@@ -62,68 +118,30 @@ const Header = () => {
                   >
                     Shop
                   </Link>
-                  {user && (
-                    <Link
-                      href='/settings'
-                      className='text-lg font-medium hover:text-primary transition-colors'
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Settings
-                    </Link>
+
+                  {/* Mobile Mobile Auth Buttons if not logged in */}
+                  {!user && (
+                    <div className='flex flex-col gap-2'>
+                      <Button
+                        variant='outline'
+                        asChild
+                        className='w-full justify-start'
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Link href='/auth/login'>Login</Link>
+                      </Button>
+                      <Button
+                        asChild
+                        className='w-full justify-start'
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Link href='/auth/signup'>Sign Up</Link>
+                      </Button>
+                    </div>
                   )}
-                  <div className='border-t pt-4 mt-2'>
-                    {user ? (
-                      <div className='flex flex-col gap-4'>
-                        <span className='text-sm font-medium text-muted-foreground'>
-                          Signed in as {user.name}
-                        </span>
-                        <Button variant='outline' className='w-full justify-start' onClick={logout}>
-                          Logout
-                        </Button>
-                      </div>
-                    ) : (
-                      <div className='flex flex-col gap-2'>
-                        <Button
-                          variant='outline'
-                          asChild
-                          className='w-full justify-start'
-                          onClick={() => setIsOpen(false)}
-                        >
-                          <Link href='/auth/login'>Login</Link>
-                        </Button>
-                        <Button
-                          asChild
-                          className='w-full justify-start'
-                          onClick={() => setIsOpen(false)}
-                        >
-                          <Link href='/auth/signup'>Sign Up</Link>
-                        </Button>
-                      </div>
-                    )}
-                  </div>
                 </div>
               </SheetContent>
             </Sheet>
-
-            <div className='hidden md:flex items-center gap-3 relative'>
-              {user ? (
-                <div className='flex items-center gap-4'>
-                  <span className='text-sm font-medium'>Hi, {user.name}</span>
-                  <Button variant='ghost' size='sm' onClick={logout}>
-                    Logout
-                  </Button>
-                </div>
-              ) : (
-                <div className='flex items-center gap-2'>
-                  <Button variant='ghost' size='sm' asChild>
-                    <Link href='/auth/login'>Login</Link>
-                  </Button>
-                  <Button size='sm' asChild>
-                    <Link href='/auth/signup'>Sign Up</Link>
-                  </Button>
-                </div>
-              )}
-            </div>
 
             {user && (
               <Button variant='outline' size='icon' asChild>

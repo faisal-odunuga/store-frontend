@@ -3,7 +3,6 @@
 import { useQuery } from '@tanstack/react-query';
 import apiService from '@/lib/apiService';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle2, XCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -13,7 +12,6 @@ export default function PaymentVerifyPage() {
   const searchParams = useSearchParams();
   const reference = searchParams.get('reference');
   const router = useRouter();
-  const { clearCart } = useCart();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['verify-payment', reference],
@@ -22,12 +20,7 @@ export default function PaymentVerifyPage() {
     retry: false,
   });
 
-  useEffect(() => {
-    if (data?.status === 'Success') {
-      clearCart();
-    }
-  }, [data, clearCart]);
-
+  console.log(data);
   if (!reference) {
     return <div className='p-8 text-center text-red-500'>Invalid Payment Reference</div>;
   }
@@ -41,7 +34,7 @@ export default function PaymentVerifyPage() {
               <div className='h-12 w-12 rounded-full border-4 border-primary border-t-transparent animate-spin'></div>
               <p className='text-lg font-medium'>Verifying Payment...</p>
             </div>
-          ) : isError || data?.status !== 'Success' ? (
+          ) : isError || data?.status !== 'success' ? (
             <div className='flex flex-col items-center gap-4'>
               <XCircle className='h-16 w-16 text-red-500' />
               <div>

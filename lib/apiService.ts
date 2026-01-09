@@ -82,21 +82,21 @@ const apiService = {
   },
   orders: {
     create: async () => {
-      const res = await api.post<ApiResponse<{ order: Order }>>('/orders');
+      const res = await api.post<ApiResponse<{ order: Order; authorization_url: string }>>(
+        '/orders'
+      );
       return res.data;
     },
     getMyOrders: async () => {
       const res = await api.get<ApiResponse<{ orders: Order[] }>>('/orders');
       return res.data;
     },
-  },
-  payment: {
-    initialize: async (orderId: string) => {
-      const res = await api.post<ApiResponse<PaymentInitResponse>>('/payments/initialize', {
-        orderId,
-      });
+    getById: async (id: string) => {
+      const res = await api.get<ApiResponse<{ order: Order }>>(`/orders/${id}`);
       return res.data;
     },
+  },
+  payment: {
     verify: async (reference: string) => {
       const res = await api.get(`/payments/verify?reference=${reference}`);
       return res.data;

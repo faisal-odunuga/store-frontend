@@ -20,7 +20,7 @@ export default function Home() {
     <main className='min-h-screen bg-background'>
       {/* Hero Section */}
       <section className='relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-background pt-24 pb-32 lg:pt-40 lg:pb-52'>
-        <div className='container px-4 md:px-6 relative z-10'>
+        <div className='container mx-auto px-4 md:px-6 relative z-10'>
           <div className='flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto'>
             <div className='inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-secondary text-secondary-foreground hover:bg-secondary/80'>
               <span className='flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse'></span>
@@ -54,7 +54,7 @@ export default function Home() {
 
       {/* Features Section */}
       <section id='features' className='py-20 bg-muted/30'>
-        <div className='container px-4 md:px-6'>
+        <div className='container mx-auto px-4 md:px-6'>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
             <div className='flex flex-col items-center text-center p-6 bg-card rounded-2xl shadow-sm border hover:shadow-md transition-shadow'>
               <div className='h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 text-primary'>
@@ -88,7 +88,7 @@ export default function Home() {
       </section>
 
       {/* Product Listing */}
-      <section className='py-24 container px-4 md:px-6'>
+      <section className='py-24 container mx-auto px-4 md:px-6'>
         <div className='flex flex-col md:flex-row items-center justify-between mb-12 gap-4'>
           <div>
             <h2 className='text-3xl font-bold tracking-tight mb-2'>Featured Products</h2>

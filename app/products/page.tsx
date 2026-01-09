@@ -9,35 +9,45 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import { useState } from 'react';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 
 export default function ProductsPage() {
   const searchParams = useSearchParams();
-  // In a real app we'd sync this with URL, but for now local state for search input
   const [searchTerm, setSearchTerm] = useState('');
+  const [page, setPage] = useState(1);
+  const limit = 10;
 
-  const {
-    data: products = [],
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['products', searchTerm], // simple dependency key
-    queryFn: () => apiService.product.getAll({ search: searchTerm }),
-    select: (data) => data.data.products,
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['products', searchTerm, page],
+    queryFn: () => apiService.product.getAll({ search: searchTerm, page, limit }),
   });
+
+  const products = data?.data?.products || [];
+  const total = data?.data?.total || 0; // Assuming API returns total
+  const totalPages = Math.ceil(total / limit);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real implementation this would trigger the refetch via state or URL update
-    // React Query will refetch if key changes.
-    // Ideally we debounce or wait for submit.
-    // Since we put searchTerm in queryKey, it will refetch on every render if we updated it live,
-    // but here we are using a form submission model or just passing it if valid.
-    // Let's keep it simple: The query param 'search' in getAll waits for this state.
-    // Note: getAll implementation in apiService might accept params object.
+    setPage(1); // Reset to page 1 on search
+  };
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
-    <div className='container mx-auto px-4 py-8'>
+    <div className='container mx-auto mx-auto px-4 py-8'>
       <div className='flex flex-col md:flex-row justify-between items-center mb-8 gap-4'>
         <div>
           <h1 className='text-3xl font-bold'>All Products</h1>
@@ -58,9 +68,9 @@ export default function ProductsPage() {
       </div>
 
       {isLoading ? (
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-          {[...Array(8)].map((_, i) => (
-            <div key={i} className='h-[400px] rounded-xl bg-muted animate-pulse' />
+        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6'>
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className='h-[300px] rounded-xl bg-muted animate-pulse' />
           ))}
         </div>
       ) : error ? (
@@ -75,11 +85,56 @@ export default function ProductsPage() {
           <p className='text-lg text-muted-foreground'>No products found.</p>
         </div>
       ) : (
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-          {products.map((product: Product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <>
+          <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-4 gap-2 lg:gap-6 mb-8'>
+            {products.map((product: Product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+
+          {totalPages > 1 && (
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    onClick={() => handlePageChange(page - 1)}
+                    className={page === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                  />
+                </PaginationItem>
+
+                {[...Array(totalPages)].map((_, i) => {
+                  const p = i + 1;
+                  // Simple pagination logic: show all for now, or implement complex range if needed
+                  if (totalPages > 7 && Math.abs(page - p) > 2 && p !== 1 && p !== totalPages) {
+                    if (Math.abs(page - p) === 3) return <PaginationEllipsis key={p} />;
+                    return null;
+                  }
+
+                  return (
+                    <PaginationItem key={p}>
+                      <PaginationLink
+                        isActive={page === p}
+                        onClick={() => handlePageChange(p)}
+                        className='cursor-pointer'
+                      >
+                        {p}
+                      </PaginationLink>
+                    </PaginationItem>
+                  );
+                })}
+
+                <PaginationItem>
+                  <PaginationNext
+                    onClick={() => handlePageChange(page + 1)}
+                    className={
+                      page === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'
+                    }
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          )}
+        </>
       )}
     </div>
   );

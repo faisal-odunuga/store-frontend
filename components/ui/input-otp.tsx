@@ -8,17 +8,17 @@ import { cn } from '@/lib/utils'
 
 function InputOTP({
   className,
-  containerClassName,
+  container mx-autoClassName,
   ...props
 }: React.ComponentProps<typeof OTPInput> & {
-  containerClassName?: string
+  container mx-autoClassName?: string
 }) {
   return (
     <OTPInput
       data-slot="input-otp"
-      containerClassName={cn(
+      container mx-autoClassName={cn(
         'flex items-center gap-2 has-disabled:opacity-50',
-        containerClassName,
+        container mx-autoClassName,
       )}
       className={cn('disabled:cursor-not-allowed', className)}
       {...props}

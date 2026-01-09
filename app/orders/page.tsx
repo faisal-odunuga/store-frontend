@@ -19,7 +19,7 @@ export default function OrdersPage() {
     queryFn: apiService.orders.getMyOrders,
     select: (data) => data.data.orders,
   });
-
+  console.log(orders);
   // const orders = (data?.data?.orders || []) as Order[];
 
   if (isLoading) {
@@ -40,7 +40,7 @@ export default function OrdersPage() {
   }
 
   return (
-    <div className='container mx-auto px-4 py-8'>
+    <div className='container mx-auto mx-auto px-4 py-8'>
       <BackButton className='mb-4' />
       <h1 className='text-2xl font-bold mb-6'>My Orders</h1>
 
@@ -55,39 +55,49 @@ export default function OrdersPage() {
         </div>
       ) : (
         <div className='space-y-4'>
-          {orders.map((order) => (
-            <div
-              key={order.id}
-              className='border rounded-lg p-6 bg-card hover:shadow-md transition-shadow'
-            >
-              <div className='flex flex-col md:flex-row justify-between md:items-center gap-4 mb-4 border-b pb-4'>
-                <div>
-                  <p className='text-sm text-muted-foreground uppercase tracking-wide'>Order ID</p>
-                  <p className='font-mono font-medium'>{order.id}</p>
-                </div>
-                <div>
-                  <p className='text-sm text-muted-foreground uppercase tracking-wide'>Date</p>
-                  <p className='font-medium'>
-                    {order.createdAt ? format(new Date(order.createdAt), 'MMM dd, yyyy') : 'N/A'}
-                  </p>
-                </div>
-                <div>
-                  <p className='text-sm text-muted-foreground uppercase tracking-wide'>Status</p>
-                  <Badge variant={order.status === 'DELIVERED' ? 'default' : 'secondary'}>
-                    {order.status}
-                  </Badge>
-                </div>
-                <div>
-                  <p className='text-sm text-muted-foreground uppercase tracking-wide'>Total</p>
-                  <p className='font-bold text-lg'>${order.totalAmount?.toLocaleString()}</p>
-                </div>
-              </div>
+          {orders.map((order) => {
+            const firstItem = order.orderItems?.[0]?.product;
+            const otherItemsCount = (order.orderItems?.length || 0) - 1;
 
-              {/* If we had items in the order object, we would list them here. 
-                  The API definition didn't strictly specify the structure of items in the order response list,
-                  but usually it's there. For now, we focus on the summary. */}
-            </div>
-          ))}
+            return (
+              <Link href={`/orders/${order.id}`} key={order.id} className='block group'>
+                <div className='border rounded-lg p-3 bg-card group-hover:shadow-md transition-all group-hover:border-primary/50 flex gap-4 items-start'>
+                  <div className='shrink-0 w-24 h-24 bg-secondary/10 rounded-md overflow-hidden border relative'>
+                    <img
+                      src={firstItem?.imageUrl || '/placeholder.png'}
+                      alt={firstItem?.name || 'Order'}
+                      className='w-full h-full object-cover'
+                    />
+                    {otherItemsCount > 0 && (
+                      <div className='absolute bottom-0 right-0 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded-tl-md'>
+                        +{otherItemsCount} more
+                      </div>
+                    )}
+                  </div>
+
+                  <div className='flex flex-col flex-1 min-w-0 gap-1'>
+                    <h2 className='font-semibold text-sm md:text-base truncate pr-2'>
+                      {firstItem?.name || `Order #${order.id.slice(0, 8)}`}
+                    </h2>
+                    <p className='text-xs text-muted-foreground'>Order {order.id}</p>
+
+                    <div className='mt-2 flex flex-col sm:flex-row sm:items-center gap-2'>
+                      <Badge
+                        variant={order.status === 'DELIVERED' ? 'default' : 'secondary'}
+                        className='w-fit text-[10px] px-2 py-0.5 h-5'
+                      >
+                        {order.status}
+                      </Badge>
+                      <p className='text-xs text-muted-foreground'>
+                        On{' '}
+                        {order.createdAt ? format(new Date(order.createdAt), 'dd-MM-yyyy') : 'N/A'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       )}
     </div>

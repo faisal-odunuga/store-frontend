@@ -28,13 +28,13 @@ function useChart() {
   const context = React.useContext(ChartContext)
 
   if (!context) {
-    throw new Error('useChart must be used within a <ChartContainer />')
+    throw new Error('useChart must be used within a <Chartcontainer mx-auto />')
   }
 
   return context
 }
 
-function ChartContainer({
+function Chartcontainer mx-auto({
   id,
   className,
   children,
@@ -43,7 +43,7 @@ function ChartContainer({
 }: React.ComponentProps<'div'> & {
   config: ChartConfig
   children: React.ComponentProps<
-    typeof RechartsPrimitive.ResponsiveContainer
+    typeof RechartsPrimitive.Responsivecontainer mx-auto
   >['children']
 }) {
   const uniqueId = React.useId()
@@ -61,9 +61,9 @@ function ChartContainer({
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>
+        <RechartsPrimitive.Responsivecontainer mx-auto>
           {children}
-        </RechartsPrimitive.ResponsiveContainer>
+        </RechartsPrimitive.Responsivecontainer mx-auto>
       </div>
     </ChartContext.Provider>
   )
@@ -344,7 +344,7 @@ function getPayloadConfigFromPayload(
 }
 
 export {
-  ChartContainer,
+  Chartcontainer mx-auto,
   ChartTooltip,
   ChartTooltipContent,
   ChartLegend,

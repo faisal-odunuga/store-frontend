@@ -5,9 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Minus, Plus, Trash2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import apiService from '@/lib/apiService';
-// Actually checks my implementation of apiService.ts -> It is default export.
-
-import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useMutation } from '@tanstack/react-query';
 import BackButton from '@/components/ui/back-button';
@@ -15,18 +12,11 @@ import BackButton from '@/components/ui/back-button';
 export default function CartPage() {
   const { items, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
   const totalPrice = getTotalPrice();
-  const router = useRouter();
   // Checkout Mutation
   const checkoutMutation = useMutation({
     mutationFn: async () => {
-      // 1. Create Order
       const orderRes = await apiService.orders.create();
-      const orderId = orderRes?.data?.order?.id;
-      if (!orderId) throw new Error('Failed to create order');
-
-      // 2. Initialize Payment
-      const paymentRes = await apiService.payment.initialize(orderId);
-      return paymentRes?.data?.authorization_url;
+      return orderRes?.data?.authorization_url;
     },
     onSuccess: (authUrl) => {
       if (authUrl) {
@@ -60,7 +50,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className='container mx-auto px-4 py-8 max-w-5xl'>
+    <div className='container mx-auto mx-auto px-4 py-8 max-w-5xl'>
       <BackButton className='mb-4' />
       <h1 className='text-3xl font-bold mb-8'>Shopping Cart</h1>
 
@@ -116,7 +106,7 @@ export default function CartPage() {
                     </Button>
                   </div>
                   <p className='font-bold'>
-                    ${(item.product.price * item.quantity).toLocaleString()}
+                    ₦{(item.product.price * item.quantity).toLocaleString()}
                   </p>
                 </div>
               </div>
@@ -140,7 +130,7 @@ export default function CartPage() {
             <div className='space-y-3 mb-6'>
               <div className='flex justify-between text-sm'>
                 <span className='text-muted-foreground'>Subtotal</span>
-                <span>${totalPrice.toLocaleString()}</span>
+                <span>₦{totalPrice.toLocaleString()}</span>
               </div>
               <div className='flex justify-between text-sm'>
                 <span className='text-muted-foreground'>Shipping</span>
@@ -148,7 +138,7 @@ export default function CartPage() {
               </div>
               <div className='border-t pt-3 flex justify-between font-bold text-lg'>
                 <span>Total</span>
-                <span>${totalPrice.toLocaleString()}</span>
+                <span>₦{totalPrice.toLocaleString()}</span>
               </div>
             </div>
 

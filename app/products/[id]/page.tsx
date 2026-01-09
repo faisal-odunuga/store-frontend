@@ -26,7 +26,7 @@ export default function ProductPage() {
 
   if (isLoading) {
     return (
-      <div className='container mx-auto px-4 py-8 animate-pulse'>
+      <div className='container mx-auto mx-auto px-4 py-8 animate-pulse'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
           <div className='aspect-square bg-muted rounded-xl'></div>
           <div className='space-y-4'>
@@ -41,7 +41,7 @@ export default function ProductPage() {
 
   if (error || !product) {
     return (
-      <div className='container mx-auto px-4 py-20 text-center'>
+      <div className='container mx-auto mx-auto px-4 py-20 text-center'>
         <h2 className='text-2xl font-bold text-destructive'>Product not found</h2>
         <p className='text-muted-foreground mt-2'>
           The product you are looking for does not exist or has been removed.
@@ -55,7 +55,7 @@ export default function ProductPage() {
   };
 
   return (
-    <div className='container mx-auto px-4 py-8 md:py-16'>
+    <div className='container mx-auto mx-auto px-4 py-8 md:py-16'>
       <BackButton className='mb-4' />
       <div className='grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20'>
         {/* Image Section */}
@@ -77,7 +77,7 @@ export default function ProductPage() {
               {product.name}
             </h1>
             <div className='flex items-center gap-4 mb-6'>
-              <span className='text-3xl font-bold'>${product.price.toLocaleString()}</span>
+              <span className='text-3xl font-bold'>₦{product.price.toLocaleString()}</span>
               {product.stock > 0 ? (
                 <span className='text-green-600 text-sm font-semibold bg-green-100 px-2 py-1 rounded-full'>
                   In Stock
