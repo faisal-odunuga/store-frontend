@@ -40,7 +40,7 @@ export default function OrdersPage() {
   }
 
   return (
-    <div className='container mx-auto mx-auto px-4 py-8'>
+    <div className='container mx-auto px-4 py-8'>
       <BackButton className='mb-4' />
       <h1 className='text-2xl font-bold mb-6'>My Orders</h1>
 
