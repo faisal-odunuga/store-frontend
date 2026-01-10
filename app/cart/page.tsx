@@ -10,7 +10,7 @@ import { useMutation } from '@tanstack/react-query';
 import BackButton from '@/components/ui/back-button';
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
+  const { cart, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
   const totalPrice = getTotalPrice();
   // Checkout Mutation
   const checkoutMutation = useMutation({
@@ -35,7 +35,7 @@ export default function CartPage() {
     checkoutMutation.mutate();
   };
 
-  if (items.length === 0) {
+  if (cart.length === 0) {
     return (
       <div className='min-h-[60vh] flex flex-col items-center justify-center p-4'>
         <h2 className='text-2xl font-bold mb-4'>Your cart is empty</h2>
@@ -56,7 +56,7 @@ export default function CartPage() {
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
         <div className='lg:col-span-2 space-y-4'>
-          {items.map((item) => (
+          {cart.map((item) => (
             <div
               key={item.id}
               className='flex gap-4 p-4 rounded-lg border bg-card/50 hover:bg-card transition-colors'
@@ -79,7 +79,7 @@ export default function CartPage() {
                     variant='ghost'
                     size='icon'
                     className='text-destructive h-8 w-8 hover:bg-destructive/10'
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => removeItem(item.product.id)}
                   >
                     <Trash2 className='h-4 w-4' />
                   </Button>

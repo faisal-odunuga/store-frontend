@@ -8,7 +8,7 @@ import { notify } from './notify';
 export function useCart() {
   const queryClient = useQueryClient();
 
-  const { data: items = [], isLoading } = useQuery({
+  const { data: cart = [], isLoading } = useQuery({
     queryKey: ['cart'],
     queryFn: apiService.cart.get,
     retry: false, // Don't retry if 401/404, just show empty
@@ -94,11 +94,11 @@ export function useCart() {
   };
 
   const getTotalPrice = () => {
-    return items.reduce((total, item) => total + (item.product?.price || 0) * item.quantity, 0);
+    return cart.reduce((total, item) => total + (item.product?.price || 0) * item.quantity, 0);
   };
 
   return {
-    items,
+    cart,
     addItem,
     removeItem,
     updateQuantity,

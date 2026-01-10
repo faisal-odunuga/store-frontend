@@ -6,14 +6,15 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ShoppingCart, Plus, Minus } from 'lucide-react';
 import { useCart } from '@/lib/cart';
+import { createSlug } from '@/lib/utils';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addItem, items, updateQuantity, removeItem } = useCart();
-  const cartItem = items.find((item) => item.product.id === product.id);
+  const { addItem, cart, updateQuantity, removeItem } = useCart();
+  const cartItem = cart.find((item) => item.product.id === product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Link href={`/products/${product.id}`} className='group'>
+    <Link href={`/products/${createSlug(product.name, product.id)}`} className='group'>
       <Card className='h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 border-0 py-0 gap-3 shadow-none hover:shadow-sm'>
         <div className='aspect-[230/180] relative overflow-hidden p-2 md:p-0'>
           <img
@@ -89,18 +90,14 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
         <CardContent className='p-2 md:p-4'>
-          <div className='mb-2 flex flex-col justify-between gap-1 md:gap-2'>
-            {/* <span className='text-xs font-medium text-muted-foreground uppercase tracking-wider'>
-              {product.category}
-            </span> */}
-            <h3 className='font-semibold text-sm md:text-base line-clamp-2 leading-tight group-hover:text-primary transition-colors'>
+          <div className='p-3'>
+            <h3 className='font-bold text-sm truncate mb-1' title={product.name}>
               {product.name}
             </h3>
-            <span className='font-bold text-base md:text-lg text-primary'>
-              ₦{product.price.toLocaleString()}
-            </span>
+            <div className='flex justify-between items-center'>
+              <p className='text-sm font-semibold'>₦{product.price.toLocaleString()}</p>
+            </div>
           </div>
-
           <p className='md:block text-xs text-muted-foreground line-clamp-2'>
             {product.description}
           </p>

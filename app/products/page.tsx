@@ -1,5 +1,15 @@
 'use client';
 
+// Converting to server component for metadata is ideal but this page uses useSearchParams and client interaction.
+// We can move the page content to a client component or just keep it as is.
+// However, since it's "use client", we can't export metadata directly from this file.
+// Wait, I can't simple add metadata to a 'use client' file.
+// I must create a layout.tsx for this route or check if I can refactor.
+// For now, let's skip metadata on 'use client' pages or refactor.
+// Actually, for products page, it should ideally be a server component fetching initial data.
+// But it's fully client-side now.
+// Let's create a layout.tsx in app/products/layout.tsx for the metadata.
+
 import { useQuery } from '@tanstack/react-query';
 import apiService from '@/lib/apiService';
 import ProductCard from '@/components/ui/product-card';

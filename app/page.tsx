@@ -96,7 +96,7 @@ export default function Home() {
           </div>
           <Button variant='ghost' asChild>
             <Link href='/products' className='group'>
-              View All{' '}
+              View All
               <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
             </Link>
           </Button>
@@ -105,7 +105,7 @@ export default function Home() {
         {isLoading ? (
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
             {[...Array(4)].map((_, i) => (
-              <div key={i} className='h-[400px] rounded-xl bg-muted animate-pulse' />
+              <div key={i} className='h-[300px] rounded-xl bg-muted animate-pulse' />
             ))}
           </div>
         ) : error ? (

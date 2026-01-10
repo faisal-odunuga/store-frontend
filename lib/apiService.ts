@@ -57,6 +57,10 @@ const apiService = {
       });
       return res.data;
     },
+    getByCategory: async (category: string) => {
+      const res = await api.get<ApiResponse<{ products: Product[] }>>(`products/category/${category}`);
+      return res.data;
+    },
   },
   cart: {
     add: async (productId: string, quantity: number) => {

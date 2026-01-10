@@ -31,7 +31,7 @@ import { useCart } from '@/lib/cart';
 import { useAuth } from '@/lib/auth-context';
 
 const Header = () => {
-  const { addItem, items } = useCart();
+  const { addItem, cart } = useCart();
   const { user, logout } = useAuth();
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -110,31 +110,41 @@ const Header = () => {
                   <SheetTitle>ElectroStore</SheetTitle>
                   <SheetDescription>Navigation Menu</SheetDescription>
                 </SheetHeader>
-                <div className='flex flex-col gap-4 mt-8'>
+                <div className='flex flex-col items-center gap-6 mt-8'>
                   <Link
                     href='/'
                     className='text-lg font-medium hover:text-primary transition-colors'
                     onClick={() => setIsOpen(false)}
                   >
+                    Home
+                  </Link>
+                  <Link
+                    href='/products'
+                    className='text-lg font-medium hover:text-primary transition-colors'
+                    onClick={() => setIsOpen(false)}
+                  >
                     Shop
+                  </Link>
+                  <Link
+                    href='/cart'
+                    className='text-lg font-medium hover:text-primary transition-colors md:hidden'
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Cart
                   </Link>
 
                   {/* Mobile Mobile Auth Buttons if not logged in */}
                   {!user && (
-                    <div className='flex flex-col gap-2'>
+                    <div className='flex flex-col gap-3 w-full max-w-xs'>
                       <Button
                         variant='outline'
                         asChild
-                        className='w-full justify-start'
+                        className='w-full'
                         onClick={() => setIsOpen(false)}
                       >
                         <Link href='/auth/login'>Login</Link>
                       </Button>
-                      <Button
-                        asChild
-                        className='w-full justify-start'
-                        onClick={() => setIsOpen(false)}
-                      >
+                      <Button asChild className='w-full' onClick={() => setIsOpen(false)}>
                         <Link href='/auth/signup'>Sign Up</Link>
                       </Button>
                     </div>
@@ -147,9 +157,9 @@ const Header = () => {
               <Button variant='outline' size='icon' asChild>
                 <Link href='/cart'>
                   <ShoppingCart className='h-5 w-5' />
-                  {items.length > 0 && (
+                  {cart.length > 0 && (
                     <span className='absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center'>
-                      {items.reduce((acc, item) => acc + item.quantity, 0)}
+                      {cart.reduce((acc, item) => acc + item.quantity, 0)}
                     </span>
                   )}
                 </Link>
