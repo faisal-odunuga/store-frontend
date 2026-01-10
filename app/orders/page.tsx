@@ -19,7 +19,6 @@ export default function OrdersPage() {
     queryFn: apiService.orders.getMyOrders,
     select: (data) => data.data.orders,
   });
-  console.log(orders);
   // const orders = (data?.data?.orders || []) as Order[];
 
   if (isLoading) {

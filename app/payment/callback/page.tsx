@@ -19,8 +19,6 @@ export default function PaymentVerifyPage() {
     enabled: !!reference,
     retry: false,
   });
-
-  console.log(data);
   if (!reference) {
     return <div className='p-8 text-center text-red-500'>Invalid Payment Reference</div>;
   }

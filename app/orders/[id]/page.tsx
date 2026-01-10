@@ -25,7 +25,6 @@ export default function OrderDetailsPage() {
     select: (data) => data.data.order,
   });
     
-    console.log(order);
 
   if (isLoading) {
     return (
