@@ -10,6 +10,7 @@ import Link from 'next/link';
 import BackButton from '@/components/ui/back-button';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import RequireCustomer from '@/components/auth/require-customer';
 
 export default function OrderDetailsClient() {
   const params = useParams();
@@ -22,7 +23,7 @@ export default function OrderDetailsClient() {
   } = useQuery({
     queryKey: ['order', orderId],
     queryFn: () => apiService.orders.getById(orderId),
-    select: (data) => data.data.order,
+    select: (data) => data.order,
   });
 
   if (isLoading) {
@@ -46,118 +47,131 @@ export default function OrderDetailsClient() {
   }
 
   return (
-    <div className='container mx-auto px-4 py-4'>
-      <BackButton className='mb-2' />
+    <RequireCustomer>
+      <div className='container mx-auto px-4 py-4'>
+        <BackButton className='mb-2' />
 
-      <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8'>
-        <div>
-          <h1 className='text-3xl font-bold mb-2'>Order #{order.id.slice(0, 8)}</h1>
-          <p className='text-muted-foreground'>
-            Placed on {order.createdAt ? format(new Date(order.createdAt), 'PPP') : 'N/A'}
-          </p>
-        </div>
-        <Badge
-          variant={order.status === 'DELIVERED' ? 'default' : 'secondary'}
-          className='text-lg px-4 py-1'
-        >
-          {order.status}
-        </Badge>
-      </div>
-
-      <div className='grid gap-6 md:grid-cols-3'>
-        <div className='md:col-span-2 space-y-6'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Order Items</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className='space-y-6'>
-                {order.orderItems && order.orderItems.length > 0 ? (
-                  order.orderItems.map((item: any, index: number) => (
-                    <div key={index} className='flex gap-4'>
-                      <div className='h-20 w-20 rounded-md overflow-hidden bg-secondary/10 shrink-0 border'>
-                        <img
-                          src={item.product?.imageUrl || '/placeholder.png'}
-                          alt={item.product?.name || 'Product'}
-                          className='h-full w-full object-cover'
-                        />
-                      </div>
-                      <div className='flex-1'>
-                        <h3 className='font-medium text-base md:text-lg mb-1 line-clamp-2'>
-                          {item.product?.name || 'Unknown Product'}
-                        </h3>
-                        <p className='text-sm text-muted-foreground mb-2'>
-                          Qty: {item.quantity} × ₦
-                          {item.price?.toLocaleString() ||
-                            item.product?.price?.toLocaleString() ||
-                            0}
-                        </p>
-                      </div>
-                      <div className='text-right'>
-                        <p className='font-bold'>
-                          ₦
-                          {(
-                            (item.price || item.product?.price || 0) * item.quantity
-                          ).toLocaleString()}
-                        </p>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <p className='text-muted-foreground'>No items details available.</p>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+        <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8'>
+          <div>
+            <h1 className='text-3xl font-bold mb-2'>
+              Order #{order.orderNumber || order.id}
+            </h1>
+            <p className='text-muted-foreground'>
+              Placed on {order.createdAt ? format(new Date(order.createdAt), 'PPP') : 'N/A'}
+            </p>
+          </div>
+          <Badge
+            variant={order.status === 'DELIVERED' ? 'default' : 'secondary'}
+            className='text-lg px-4 py-1'
+          >
+            {order.status}
+          </Badge>
         </div>
 
-        <div className='space-y-6'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Order Summary</CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div className='flex justify-between'>
-                <span className='text-muted-foreground'>Subtotal</span>
-                <span>₦{order.totalAmount?.toLocaleString()}</span>
-              </div>
-              <div className='flex justify-between'>
-                <span className='text-muted-foreground'>Shipping</span>
-                <span>Free</span>
-              </div>
-              <Separator />
-              <div className='flex justify-between font-bold text-lg'>
-                <span>Total</span>
-                <span>₦{order.totalAmount?.toLocaleString()}</span>
-              </div>
-            </CardContent>
-          </Card>
+        <div className='grid gap-6 md:grid-cols-3'>
+          <div className='md:col-span-2 space-y-6'>
+            <Card>
+              <CardHeader>
+                <CardTitle>Order Items</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className='space-y-6'>
+                  {order.orderItems && order.orderItems.length > 0 ? (
+                    order.orderItems.map((item: any, index: number) => (
+                      <div key={index} className='flex gap-4'>
+                        <div className='h-20 w-20 rounded-md overflow-hidden bg-secondary/10 shrink-0 border'>
+                          <img
+                            src={item.product?.imageUrl || '/placeholder.png'}
+                            alt={item.product?.name || 'Product'}
+                            className='h-full w-full object-cover'
+                          />
+                        </div>
+                        <div className='flex-1'>
+                          <h3 className='font-medium text-base md:text-lg mb-1 line-clamp-2'>
+                            {item.product?.name || 'Unknown Product'}
+                          </h3>
+                          <p className='text-sm text-muted-foreground mb-2'>
+                            Qty: {item.quantity} × ₦
+                            {(
+                              item.sellingPrice ??
+                              item.price ??
+                              item.product?.sellingPrice ??
+                              item.product?.price ??
+                              0
+                            ).toLocaleString()}
+                          </p>
+                        </div>
+                        <div className='text-right'>
+                          <p className='font-bold'>
+                            ₦
+                            {(
+                              item.totalPrice ||
+                              (item.sellingPrice ??
+                                item.price ??
+                                item.product?.sellingPrice ??
+                                item.product?.price ??
+                                0) * item.quantity
+                            ).toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className='text-muted-foreground'>No items details available.</p>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Customer Details</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className='space-y-2 text-sm'>
-                <div>
-                  <span className='font-medium block'>Name</span>
-                  <span className='text-muted-foreground'>{order.user?.name || 'N/A'}</span>
+          <div className='space-y-6'>
+            <Card>
+              <CardHeader>
+                <CardTitle>Order Summary</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                <div className='flex justify-between'>
+                  <span className='text-muted-foreground'>Subtotal</span>
+                  <span>₦{order.totalAmount?.toLocaleString()}</span>
                 </div>
-                <div>
-                  <span className='font-medium block'>Email</span>
-                  <span className='text-muted-foreground'>{order.user?.email || 'N/A'}</span>
+                <div className='flex justify-between'>
+                  <span className='text-muted-foreground'>Shipping</span>
+                  <span>Free</span>
                 </div>
-                {order.user?.address && (
+                <Separator />
+                <div className='flex justify-between font-bold text-lg'>
+                  <span>Total</span>
+                  <span>₦{order.totalAmount?.toLocaleString()}</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Customer Details</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className='space-y-2 text-sm'>
                   <div>
-                    <span className='font-medium block'>Shipping Address</span>
-                    <span className='text-muted-foreground'>{order.user.address}</span>
+                    <span className='font-medium block'>Name</span>
+                    <span className='text-muted-foreground'>{order.user?.name || 'N/A'}</span>
                   </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+                  <div>
+                    <span className='font-medium block'>Email</span>
+                    <span className='text-muted-foreground'>{order.user?.email || 'N/A'}</span>
+                  </div>
+                  {order.shippingAddress && (
+                    <div>
+                      <span className='font-medium block'>Shipping Address</span>
+                      <span className='text-muted-foreground'>{order.shippingAddress}</span>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
-    </div>
+    </RequireCustomer>
   );
 }

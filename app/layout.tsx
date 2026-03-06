@@ -3,7 +3,10 @@ import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import './globals.css';
 import Header from '@/components/sections/header';
-import Providers from './providers';
+import ClerkProviderWrapper from '@/components/providers/clerk-provider-wrapper';
+import QueryProvider from '@/providers/QueryProvider';
+import CustomerGate from '@/components/auth/customer-gate';
+import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
   title: {
@@ -19,13 +22,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
-      </body>
-    </html>
+    <ClerkProviderWrapper>
+      <html lang='en'>
+        <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+          <QueryProvider>
+            <CustomerGate>
+              <Header />
+              {children}
+              <Toaster />
+            </CustomerGate>
+          </QueryProvider>
+        </body>
+      </html>
+    </ClerkProviderWrapper>
   );
 }

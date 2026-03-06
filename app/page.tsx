@@ -14,7 +14,7 @@ export default function Home() {
     queryFn: () => apiService.product.getAll({ limit: 8 }),
   });
 
-  const products = (data?.data?.products || []) as Product[];
+  const products = (data?.products || []) as Product[];
 
   return (
     <main className='min-h-screen bg-background'>

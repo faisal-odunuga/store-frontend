@@ -1,118 +1,121 @@
 import api from './api';
-import {
-  AuthResponse,
-  CartItem,
-  Order,
-  Product,
-  Review,
-  StatsResponse,
-  User,
-  PaymentInitResponse,
-  ApiResponse,
-} from './definitions';
+import { CartItem, Order, Product, Review, ApiResponse } from './definitions';
+
+const normalizeProduct = (product: any): Product => ({
+  ...product,
+  price: product?.price ?? product?.sellingPrice ?? 0,
+  sellingPrice: product?.sellingPrice ?? product?.price ?? 0,
+  discountPrice: product?.discountPrice ?? null,
+});
 
 const apiService = {
   auth: {
-    signup: async (data: any) => {
-      const res = await api.post<ApiResponse<AuthResponse>>('/auth/signup', data);
-      return res.data;
-    },
-    login: async (data: any) => {
-      const res = await api.post<ApiResponse<AuthResponse>>('/auth/login', data);
-      return res.data;
-    },
     me: async () => {
-      const res = await api.get<ApiResponse<AuthResponse>>('/auth/me');
-      return res.data;
-    },
-    logout: async () => {
-      const res = await api.post('/auth/logout');
-      return res.data;
-    },
-    forgotPassword: async (email: string) => {
-      const res = await api.patch('/auth/forgot-password', { email });
-      return res.data;
-    },
-    resetPassword: async (token: string, password: string) => {
-      const res = await api.patch(`/auth/reset-password/${token}`, { password });
-      return res.data;
-    },
-    changePassword: async (data: any) => {
-      const res = await api.patch('/auth/change-password', data);
+      const res = await api.get<{ user: { role: string } }>('/auth/me');
       return res.data;
     },
   },
   product: {
     getAll: async (params?: any) => {
-      const res = await api.get('/products', { params });
-      return res.data;
+      const res = await api.get<{ products: Product[]; total: number }>('/products', { params });
+      const data = res.data;
+      if (data?.products) {
+        data.products = data.products.map(normalizeProduct);
+      }
+      return data;
     },
     getById: async (id: string) => {
-      const res = await api.get<ApiResponse<{ product: Product }>>(`/products/${id}`);
-      return res.data;
+      const res = await api.get<{ product: Product }>(`/products/${id}`);
+      const data = res.data;
+      if (data?.product) {
+        data.product = normalizeProduct(data.product);
+      }
+      return data;
     },
     create: async (formData: FormData) => {
-      const res = await api.post('/products', formData, {
+      const res = await api.post<{ product: Product }>('/products', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       return res.data;
     },
     getByCategory: async (category: string) => {
-      const res = await api.get<ApiResponse<{ products: Product[] }>>(`products/category/${category}`);
-      return res.data;
+      const res = await api.get<{ products: Product[] }>(`products/category/${category}`);
+      const data = res.data;
+      if (data?.products) {
+        data.products = data.products.map(normalizeProduct);
+      }
+      return data;
     },
   },
   cart: {
     add: async (productId: string, quantity: number) => {
-      const res = await api.post('/cart', { productId, quantity });
+      const res = await api.post<{ cart: CartItem }>('/cart', { productId, quantity });
       return res.data;
     },
     get: async () => {
-      const res = await api.get<ApiResponse<{ cart: CartItem[]; total: number }>>('/cart');
-      return res.data;
+      const res = await api.get<{ cart: CartItem[]; total: number }>('/cart');
+      const data = res.data;
+      if (data?.cart) {
+        data.cart = data.cart.map((item) => ({
+          ...item,
+          product: normalizeProduct(item.product),
+        }));
+      }
+      return data;
     },
     update: async (productId: string, quantity: number) => {
-      const res = await api.patch(`/cart/${productId}`, { quantity });
+      const res = await api.patch<{ cart: CartItem }>(`/cart/${productId}`, { quantity });
       return res.data;
     },
     remove: async (productId: string) => {
-      const res = await api.delete(`/cart/${productId}`);
-      return res.data;
+      await api.delete(`/cart/${productId}`);
     },
     clear: async () => {
-      const res = await api.delete('/cart');
-      return res.data;
+      await api.delete('/cart');
     },
   },
   orders: {
-    create: async () => {
-      const res = await api.post<ApiResponse<{ order: Order; authorization_url: string }>>(
-        '/orders'
+    create: async (payload: {
+      items: { productId: string; quantity: number }[];
+      shippingAddress: string;
+      paymentMethod?: string;
+      discountAmount?: number;
+    }) => {
+      const res = await api.post<{ order: Order; payment?: { authorization_url: string } }>(
+        '/orders',
+        payload,
       );
       return res.data;
     },
     getMyOrders: async () => {
-      const res = await api.get<ApiResponse<{ orders: Order[] }>>('/orders');
+      const res = await api.get<{ orders: Order[] }>('/orders');
       return res.data;
     },
     getById: async (id: string) => {
-      const res = await api.get<ApiResponse<{ order: Order }>>(`/orders/${id}`);
+      const res = await api.get<{ order: Order }>(`/orders/${id}`);
       return res.data;
     },
   },
   payment: {
+    initialize: async (orderId: string) => {
+      const res = await api.post<{ authorization_url: string; reference: string }>(
+        '/payments/initialize',
+        { orderId },
+      );
+      return res.data;
+    },
     verify: async (reference: string) => {
-      const res = await api.get(`/payments/verify?reference=${reference}`);
+      const res = await api.get<{ status: string }>(`/payments/verify?reference=${reference}`);
       return res.data;
     },
   },
   reviews: {
     create: async (data: { productId: string; rating: number; comment?: string }) => {
-      const res = await api.post('/reviews', data);
+      const res = await api.post<{ review: Review }>('/reviews', data);
       return res.data;
     },
     getByProduct: async (productId: string) => {
-      const res = await api.get(`/reviews/${productId}`);
+      const res = await api.get<{ reviews: Review[] }>(`/reviews/${productId}`);
       return res.data;
     },
   },

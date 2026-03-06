@@ -1,20 +1,23 @@
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '@clerk/nextjs';
 import apiService from './apiService';
 import { CartItem, Product } from './definitions';
 import { notify } from './notify';
 
 export function useCart() {
   const queryClient = useQueryClient();
+  const { isSignedIn } = useAuth();
 
   const { data: cart = [], isLoading } = useQuery({
     queryKey: ['cart'],
     queryFn: apiService.cart.get,
+    enabled: isSignedIn,
     retry: false, // Don't retry if 401/404, just show empty
     select: (data) => {
-      const cart = data.data;
-      return (Array.isArray(cart) ? cart : cart?.cart || []) as CartItem[];
+      const cart = data?.cart || data?.cartItems || [];
+      return (Array.isArray(cart) ? cart : []) as CartItem[];
     },
   });
 
@@ -93,8 +96,11 @@ export function useCart() {
     clearMutation.mutate();
   };
 
+  const getItemPrice = (item: CartItem) =>
+    item.product?.discountPrice ?? item.product?.sellingPrice ?? item.product?.price ?? 0;
+
   const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + (item.product?.price || 0) * item.quantity, 0);
+    return cart.reduce((total, item) => total + getItemPrice(item) * item.quantity, 0);
   };
 
   return {

@@ -1,5 +1,7 @@
-import SignupForm from '@/components/auth/signup-form';
+'use client';
+
 import BackButton from '@/components/ui/back-button';
+import { SignUp } from '@clerk/nextjs';
 
 export default function SignupPage() {
   return (
@@ -7,7 +9,7 @@ export default function SignupPage() {
       <div className='absolute left-4 top-4 md:left-8 md:top-8 z-20'>
         <BackButton />
       </div>
-      <SignupForm />
+      <SignUp routing='hash' />
     </div>
   );
 }

@@ -28,11 +28,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useCart } from '@/lib/cart';
-import { useAuth } from '@/lib/auth-context';
+import { useClerk, useUser } from '@clerk/nextjs';
 
 const Header = () => {
-  const { addItem, cart } = useCart();
-  const { user, logout } = useAuth();
+  const { cart } = useCart();
+  const { user } = useUser();
+  const { signOut } = useClerk();
 
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -59,7 +60,9 @@ const Header = () => {
                 <DropdownMenuTrigger asChild>
                   <Button variant='ghost' size='sm' className='gap-2 pl-0 md:pl-4'>
                     <UserIcon className='h-5 w-5 md:h-4 md:w-4' />
-                    <span className='hidden md:block max-w-[100px] truncate'>{user.name}</span>
+                    <span className='hidden md:block max-w-[100px] truncate'>
+                      {user.fullName || user.primaryEmailAddress?.emailAddress || 'Account'}
+                    </span>
                     <ChevronDown className='hidden md:block h-3 w-3 opacity-50' />
                   </Button>
                 </DropdownMenuTrigger>
@@ -80,7 +83,7 @@ const Header = () => {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
-                    onClick={logout}
+                    onClick={() => signOut()}
                     className='text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer'
                   >
                     <LogOut className='nr-2 h-4 w-4 mr-2' />

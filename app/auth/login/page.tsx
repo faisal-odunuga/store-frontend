@@ -1,5 +1,7 @@
-import LoginForm from '@/components/auth/login-form';
+'use client';
+
 import BackButton from '@/components/ui/back-button';
+import { SignIn } from '@clerk/nextjs';
 
 export default function LoginPage() {
   return (
@@ -7,7 +9,7 @@ export default function LoginPage() {
       <div className='absolute left-4 top-4 md:left-8 md:top-8 z-20'>
         <BackButton />
       </div>
-      <LoginForm />
+      <SignIn routing='hash' />
     </section>
   );
 }

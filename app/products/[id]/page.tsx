@@ -13,7 +13,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   try {
     const res = await apiService.product.getById(id);
-    const product = res?.data?.product;
+    // console.log(res.  )
+    const product = res.product;
 
     if (product) {
       return {

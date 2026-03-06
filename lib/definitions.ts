@@ -2,9 +2,8 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  role: 'CUSTOMER' | 'ADMIN';
+  role: 'ADMIN' | 'MANAGER' | 'CUSTOMER';
   phone?: string | null;
-  address?: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -13,7 +12,10 @@ export interface Product {
   id: string;
   name: string;
   description?: string | null;
+  sku?: string;
   price: number;
+  sellingPrice?: number;
+  discountPrice?: number | null;
   stock: number;
   imageUrl?: string | null;
   category?: string | null;
@@ -36,19 +38,23 @@ export interface OrderItem {
   orderId: string;
   productId: string;
   quantity: number;
-  price: number;
+  price?: number;
+  sellingPrice?: number;
+  totalPrice?: number;
   product: Product;
 }
 
 export interface Order {
   id: string;
+  orderNumber?: string;
   userId: string;
   // In the API, we return 'orderItems', not 'items'
   orderItems: OrderItem[];
   // For orders, we sanitize the user object to only include specific fields
-  user: Pick<User, 'id' | 'name' | 'email' | 'phone' | 'address'>;
+  user: Pick<User, 'id' | 'name' | 'email' | 'phone'>;
   totalAmount: number;
-  status: 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
+  shippingAddress?: string;
+  status: 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED' | 'REFUNDED';
   createdAt: string;
   updatedAt: string;
 }

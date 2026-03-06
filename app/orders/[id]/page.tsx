@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.id;
 
   return {
-    title: `Order #${id.slice(0, 8)}`,
+    title: `Order #${id}`,
     description: `View details for order #${id}`,
   };
 }

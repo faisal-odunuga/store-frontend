@@ -24,8 +24,7 @@ export default function SimilarProducts({ category, currentProductId }: SimilarP
     enabled: !!category,
   });
 
-
-  const products = (data?.data?.products || []).filter(
+  const products = (data?.products || []).filter(
     (p) => p.id !== currentProductId
   ) as Product[];
 

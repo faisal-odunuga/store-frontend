@@ -25,7 +25,11 @@ export default function ProductDetailsClient() {
     enabled: !!id,
   });
 
-  const product = data?.data?.product as Product;
+  const product = data?.product as Product;
+  const displayPrice =
+    product?.discountPrice ?? product?.sellingPrice ?? product?.price ?? 0;
+  const originalPrice =
+    product?.discountPrice ? product?.sellingPrice ?? product?.price ?? 0 : null;
 
   if (isLoading) {
     return (
@@ -80,7 +84,12 @@ export default function ProductDetailsClient() {
               {product.name}
             </h1>
             <div className='flex items-center gap-4 mb-6'>
-              <span className='text-3xl font-bold'>₦{product.price.toLocaleString()}</span>
+              <span className='text-3xl font-bold'>₦{displayPrice.toLocaleString()}</span>
+              {originalPrice && originalPrice > displayPrice && (
+                <span className='text-sm text-muted-foreground line-through'>
+                  ₦{originalPrice.toLocaleString()}
+                </span>
+              )}
               {product.stock > 0 ? (
                 <span className='text-green-600 text-sm font-semibold bg-green-100 px-2 py-1 rounded-full'>
                   In Stock
@@ -90,6 +99,17 @@ export default function ProductDetailsClient() {
                   Out of Stock
                 </span>
               )}
+            </div>
+            <div className='flex flex-wrap gap-2 text-xs text-muted-foreground'>
+              {product.sku && (
+                <span className='border rounded-full px-2 py-1'>SKU: {product.sku}</span>
+              )}
+              {product.category && (
+                <span className='border rounded-full px-2 py-1'>{product.category}</span>
+              )}
+              <span className='border rounded-full px-2 py-1'>
+                Stock: {product.stock}
+              </span>
             </div>
           </div>
 
@@ -169,6 +189,42 @@ export default function ProductDetailsClient() {
           </div>
         </div>
       </div>
+
+      {/* Details & Policy */}
+      <section className='mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6'>
+        <div className='md:col-span-2 space-y-4'>
+          <h2 className='text-2xl font-bold'>Product Details</h2>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+            <div className='rounded-xl border p-4 bg-card'>
+              <p className='text-xs text-muted-foreground mb-1'>Category</p>
+              <p className='font-semibold'>{product.category || 'General'}</p>
+            </div>
+            <div className='rounded-xl border p-4 bg-card'>
+              <p className='text-xs text-muted-foreground mb-1'>SKU</p>
+              <p className='font-semibold'>{product.sku || 'N/A'}</p>
+            </div>
+            <div className='rounded-xl border p-4 bg-card'>
+              <p className='text-xs text-muted-foreground mb-1'>Availability</p>
+              <p className='font-semibold'>
+                {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+              </p>
+            </div>
+            <div className='rounded-xl border p-4 bg-card'>
+              <p className='text-xs text-muted-foreground mb-1'>Price</p>
+              <p className='font-semibold'>₦{displayPrice.toLocaleString()}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className='space-y-4'>
+          <h2 className='text-2xl font-bold'>Delivery & Returns</h2>
+          <div className='rounded-xl border p-4 bg-card text-sm text-muted-foreground space-y-3'>
+            <p>Free standard delivery on eligible orders.</p>
+            <p>Easy returns within 30 days for unused items.</p>
+            <p>Warranty coverage included where applicable.</p>
+          </div>
+        </div>
+      </section>
 
       {/* Similar Products Recommendation */}
       {product.category && (

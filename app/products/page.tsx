@@ -40,8 +40,8 @@ export default function ProductsPage() {
     queryFn: () => apiService.product.getAll({ search: searchTerm, page, limit }),
   });
 
-  const products = data?.data?.products || [];
-  const total = data?.data?.total || 0; // Assuming API returns total
+  const products = data?.products || [];
+  const total = data?.total || 0; // Assuming API returns total
   const totalPages = Math.ceil(total / limit);
 
   const handleSearch = (e: React.FormEvent) => {

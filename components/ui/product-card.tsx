@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ShoppingCart, Plus, Minus } from 'lucide-react';
 import { useCart } from '@/lib/cart';
-import { createSlug } from '@/lib/utils';
 
 interface ProductCardProps {
   product: Product;
@@ -37,8 +36,11 @@ export default function ProductCard({ product }: ProductCardProps) {
     }
   };
 
+  const displayPrice =
+    product.discountPrice ?? product.sellingPrice ?? product.price ?? 0;
+
   return (
-    <Link href={`/products/${createSlug(product.name, product.id)}`} className='group'>
+    <Link href={`/products/${product.sku || product.id}`} className='group'>
       <Card className='h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 border-0 py-0 gap-3 shadow-none hover:shadow-sm'>
         <div className='aspect-[230/180] relative overflow-hidden p-2 md:p-0'>
           <img
@@ -95,7 +97,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               {product.name}
             </h3>
             <div className='flex justify-between items-center'>
-              <p className='text-sm font-semibold'>₦{product.price.toLocaleString()}</p>
+              <p className='text-sm font-semibold'>₦{displayPrice.toLocaleString()}</p>
             </div>
           </div>
           <p className='md:block text-xs text-muted-foreground line-clamp-2'>
