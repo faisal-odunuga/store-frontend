@@ -11,6 +11,9 @@ type ProductCardProps = {
 };
 
 export function ProductCard({ product }: ProductCardProps) {
+  const displayPrice = product.discountPrice ?? product.sellingPrice ?? product.price ?? 0;
+  const originalPrice = product.discountPrice ? (product.sellingPrice ?? product.price ?? 0) : null;
+
   return (
     <Card className='overflow-hidden hover:shadow-lg transition-shadow'>
       <div className='relative aspect-square bg-muted'>
@@ -34,7 +37,16 @@ export function ProductCard({ product }: ProductCardProps) {
       <CardContent className='p-4'>
         <div className='flex items-start justify-between gap-2 mb-2'>
           <h3 className='font-semibold text-base leading-tight line-clamp-2'>{product.name}</h3>
-          <span className='text-lg font-bold text-primary whitespace-nowrap'>₦{product.price}</span>
+          <div className='flex flex-col items-end'>
+            <span className='text-lg font-bold text-primary whitespace-nowrap'>
+              ₦{displayPrice.toLocaleString()}
+            </span>
+            {originalPrice && originalPrice > displayPrice && (
+              <span className='text-[10px] text-muted-foreground line-through font-medium'>
+                ₦{originalPrice.toLocaleString()}
+              </span>
+            )}
+          </div>
         </div>
         {/* <p className='text-sm text-muted-foreground mb-2'>{product.maker}</p> */}
         <p className='text-sm text-foreground/80 line-clamp-2 mb-3'>{product.description}</p>

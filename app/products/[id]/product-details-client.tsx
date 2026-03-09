@@ -26,10 +26,10 @@ export default function ProductDetailsClient() {
   });
 
   const product = data?.product as Product;
-  const displayPrice =
-    product?.discountPrice ?? product?.sellingPrice ?? product?.price ?? 0;
-  const originalPrice =
-    product?.discountPrice ? product?.sellingPrice ?? product?.price ?? 0 : null;
+  const displayPrice = product?.discountPrice ?? product?.sellingPrice ?? product?.price ?? 0;
+  const originalPrice = product?.discountPrice
+    ? (product?.sellingPrice ?? product?.price ?? 0)
+    : null;
 
   if (isLoading) {
     return (
@@ -107,9 +107,7 @@ export default function ProductDetailsClient() {
               {product.category && (
                 <span className='border rounded-full px-2 py-1'>{product.category}</span>
               )}
-              <span className='border rounded-full px-2 py-1'>
-                Stock: {product.stock}
-              </span>
+              <span className='border rounded-full px-2 py-1'>Stock: {product.stock}</span>
             </div>
           </div>
 
@@ -213,6 +211,18 @@ export default function ProductDetailsClient() {
               <p className='text-xs text-muted-foreground mb-1'>Price</p>
               <p className='font-semibold'>₦{displayPrice.toLocaleString()}</p>
             </div>
+            {product.weight && (
+              <div className='rounded-xl border p-4 bg-card'>
+                <p className='text-xs text-muted-foreground mb-1'>Weight</p>
+                <p className='font-semibold'>{product.weight} kg</p>
+              </div>
+            )}
+            {product.barcode && (
+              <div className='rounded-xl border p-4 bg-card'>
+                <p className='text-xs text-muted-foreground mb-1'>Barcode (UPC/EAN)</p>
+                <p className='font-semibold'>{product.barcode}</p>
+              </div>
+            )}
           </div>
         </div>
 

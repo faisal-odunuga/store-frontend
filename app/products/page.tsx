@@ -58,20 +58,21 @@ export default function ProductsPage() {
 
   return (
     <div className='container mx-auto  px-4 py-8'>
-      <div className='flex flex-col md:flex-row justify-between items-center mb-8 gap-4'>
-        <div>
-          <h1 className='text-3xl font-bold'>All Products</h1>
-          <p className='text-muted-foreground'>Browse our complete collection.</p>
+      <div className='flex flex-wrap md:flex-row justify-between items-center mb-8 gap-4'>
+        <div className='w-full md:w-auto text-center md:text-left'>
+          <h1 className='text-2xl md:text-3xl font-bold'>All Products</h1>
+          <p className='text-sm text-muted-foreground'>Browse our complete collection.</p>
         </div>
 
-        <div className='flex w-full max-w-sm items-center space-x-2'>
+        <div className='flex w-full md:max-w-sm items-center space-x-2'>
           <Input
             type='text'
             placeholder='Search products...'
             value={searchTerm}
+            className='flex-1 h-10'
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Button type='submit' size='icon' onClick={handleSearch}>
+          <Button type='submit' size='icon' className='h-10 w-10 shrink-0' onClick={handleSearch}>
             <Search className='h-4 w-4' />
           </Button>
         </div>

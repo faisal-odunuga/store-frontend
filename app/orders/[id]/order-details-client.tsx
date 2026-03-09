@@ -52,17 +52,17 @@ export default function OrderDetailsClient() {
         <BackButton className='mb-2' />
 
         <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8'>
-          <div>
-            <h1 className='text-3xl font-bold mb-2'>
+          <div className='min-w-0'>
+            <h1 className='text-2xl md:text-3xl font-bold mb-2 break-all'>
               Order #{order.orderNumber || order.id}
             </h1>
-            <p className='text-muted-foreground'>
+            <p className='text-sm text-muted-foreground'>
               Placed on {order.createdAt ? format(new Date(order.createdAt), 'PPP') : 'N/A'}
             </p>
           </div>
           <Badge
             variant={order.status === 'DELIVERED' ? 'default' : 'secondary'}
-            className='text-lg px-4 py-1'
+            className='text-sm md:text-lg px-3 md:px-4 py-1 flex-shrink-0'
           >
             {order.status}
           </Badge>

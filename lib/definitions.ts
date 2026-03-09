@@ -16,6 +16,9 @@ export interface Product {
   price: number;
   sellingPrice?: number;
   discountPrice?: number | null;
+  costPrice?: number;
+  weight?: number | null;
+  barcode?: string | null;
   stock: number;
   imageUrl?: string | null;
   category?: string | null;
