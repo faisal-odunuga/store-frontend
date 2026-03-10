@@ -20,11 +20,16 @@ export default function CustomerGate({ children }: { children: React.ReactNode }
 
   // Define public routes that don't need enforcement
   const isAuthRoute = pathname?.startsWith('/auth');
+  const isPublicRoute =
+    pathname === '/' ||
+    pathname === '/products' ||
+    pathname?.startsWith('/products/') ||
+    pathname?.startsWith('/product/');
 
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['auth-me'],
     queryFn: apiService.auth.me,
-    enabled: isLoaded && isSignedIn && !isAuthRoute,
+    enabled: isLoaded && isSignedIn && !isAuthRoute && !isPublicRoute,
     retry: 1,
     staleTime: 300_000, // 5 minutes cache
   });
@@ -40,6 +45,11 @@ export default function CustomerGate({ children }: { children: React.ReactNode }
 
   // If we are on a login/signup page, don't gate it
   if (isAuthRoute) {
+    return <>{children}</>;
+  }
+
+  // Public routes are always accessible (browsing products, home page)
+  if (isPublicRoute) {
     return <>{children}</>;
   }
 
@@ -94,9 +104,7 @@ export default function CustomerGate({ children }: { children: React.ReactNode }
                 "We couldn't verify your customer profile. Please sign in with a registered account."}
           </div>
           <div className='flex flex-col gap-3'>
-            {isUnauthorized && (
-              <Button onClick={() => refetch()}>Retry</Button>
-            )}
+            {isUnauthorized && <Button onClick={() => refetch()}>Retry</Button>}
             <Button variant='outline' onClick={() => signOut()}>
               Sign out
             </Button>
