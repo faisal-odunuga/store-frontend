@@ -1,8 +1,25 @@
-import { clerkMiddleware } from '@clerk/nextjs/server';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export default clerkMiddleware(async () => {
-  // We'll handle protection in client-side layouts to avoid the refresh glitch
-});
+// Lightweight middleware: strip Clerk handshake artifacts so URLs stay clean.
+export function middleware(req: NextRequest) {
+  const url = req.nextUrl.clone();
+  let changed = false;
+
+  // Remove any __clerk* noise params
+  for (const key of url.searchParams.keys()) {
+    if (key.startsWith('__clerk')) {
+      url.searchParams.delete(key);
+      changed = true;
+    }
+  }
+
+  if (changed) {
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: [

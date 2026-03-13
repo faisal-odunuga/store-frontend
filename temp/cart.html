@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping Cart - Stuffus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(236, 91, 19, 0.1);
+        }
+        .dark .glass-effect {
+            background: rgba(34, 22, 16, 0.7);
+            border: 1px solid rgba(236, 91, 19, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex flex-col w-full min-h-screen overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 glass-effect border-b border-primary/10 px-4 md:px-10 lg:px-40 py-3 flex items-center justify-between whitespace-nowrap">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">shopping_bag</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">Stuffus</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full bg-primary/5 dark:bg-primary/10 border border-primary/10">
+<div class="text-primary/60 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:outline-0 focus:ring-0 placeholder:text-slate-400 text-sm font-normal" placeholder="Search products..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Deals</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Orders</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+<button class="relative flex items-center justify-center rounded-xl h-10 w-10 bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+<span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-slate-900 dark:bg-white text-[10px] text-white dark:text-slate-900 font-bold">3</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User profile avatar portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBV2AXGMv25deZRDFDiQwbLsHb8OXqUgH9kQsqV4aNMEdETqy0JaterYTHvtOqP3CY7d03RKEta-fx6Gre_TMLu_ZFalDMRx3SheIT50g6HsTtfJV9gZBY-4qAdialdySytmqbna7giDizniWWO0ipWsVr5SZ3LNMEO_fFGOPJvpU_uoMhRdwU0CUJzXGzgdXsYoN671HqYJXeFYqS8yU-A_d-mP6SW0Cx9n25-0C07OoxL60dPP2AvHDJD4lq9HKXAa56H791HbQ");'></div>
+</div>
+</header>
+<main class="flex-1 px-4 md:px-10 lg:px-40 py-8">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 mb-8 text-sm font-medium">
+<a class="text-primary hover:underline" href="#">Home</a>
+<span class="text-slate-400">/</span>
+<span class="text-slate-900 dark:text-slate-100">Shopping Cart</span>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Cart Items Section -->
+<div class="flex-1 space-y-6">
+<div class="flex items-end justify-between border-b border-primary/10 pb-4">
+<h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">Your Cart</h1>
+<p class="text-primary font-medium">3 items selected</p>
+</div>
+<!-- Item 1 -->
+<div class="glass-effect rounded-xl p-4 md:p-6 flex flex-col md:flex-row gap-6 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-32 border border-primary/10" data-alt="Premium wireless noise cancelling headphones" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4h1WgV7sdBlvPVWEn7EoYAxVb17sfSIWp_edZxRJtpZioHQW6mHOaWoxMUaGlhAq33Qi4fKPu9tM1PrjdEZJ4jYzX2HI1-ipfW6vHxgviejpeM_wkOkYD6x2gXOcthpmLfOQXGYN_0Ops-VtfuaDSGrzciD2TRpDFCw5X60ELK1IqMOHuRWuwDHMV8xxhe8xtZoZubxbR8PMoc1UZlsgODC8VUHy5xHXUjHxMN2Iq6Bnd72KXJAlTlucJ4Xz6c8lR4QTmQcO9-g");'></div>
+<div class="flex-1 w-full">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-snug">Premium Wireless Headphones</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Space Gray | Noise Cancelling</p>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex items-center gap-1 bg-primary/5 dark:bg-primary/10 rounded-lg p-1 border border-primary/10">
+<button class="h-8 w-8 flex items-center justify-center rounded-md hover:bg-primary/20 text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-10 text-center bg-transparent border-none focus:ring-0 font-bold text-slate-900 dark:text-slate-100" readonly="" type="number" value="1"/>
+<button class="h-8 w-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<p class="text-xl font-black text-primary">$299.00</p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="glass-effect rounded-xl p-4 md:p-6 flex flex-col md:flex-row gap-6 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-32 border border-primary/10" data-alt="Minimalist adjustable matte black desk lamp" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5tSNdLFRTXvT3WdCyiihDjLfLH3GLIwdmxK1WJTz8KGQgXmqvX-e2IdAyyWiqYS72QpejgyKkvEq8qM40sKTyHdnsvi7xp-VxQZ0tLAVotLTS6Kac5n6Bmr801xkBeIr-2uyf2DckF3dHDHrmkz0lGJypnLTfxXTZsERkzyGk1wvhOmYoiLH4EuzHkbrla1vdVD41V5Q0FocujHyoSNsyDrSgzywglN37Iu3JJG3fAIeMGMRQhCniaR9Bj2GjlysNLFMiW4geHQ");'></div>
+<div class="flex-1 w-full">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-snug">Minimalist Desk Lamp</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Matte Black | Adjustable Arm</p>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex items-center gap-1 bg-primary/5 dark:bg-primary/10 rounded-lg p-1 border border-primary/10">
+<button class="h-8 w-8 flex items-center justify-center rounded-md hover:bg-primary/20 text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-10 text-center bg-transparent border-none focus:ring-0 font-bold text-slate-900 dark:text-slate-100" readonly="" type="number" value="2"/>
+<button class="h-8 w-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-primary">$178.00</p>
+<p class="text-xs text-slate-400">$89.00 each</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="glass-effect rounded-xl p-4 md:p-6 flex flex-col md:flex-row gap-6 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-32 border border-primary/10" data-alt="Modern tablet with stylus" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCEZ63HP-PxzD1qcMr_mZ8m5itWKrjEv8pm01UjCd72ZLrOGidb7_beyM4jRq9520AMEPC7qCPo8LmWXKXP1MrzwGv6u1iwa957wCr2IIMSI-Ww3cQDr91RD1V0AOKP4Xrr1JYNwGUcnc4WiJxaafjlUm15Sr4kLZtoQW5ncMpKF6JYoGAcQ3idubgRjmpLOnX04vcMdUxkr89yu5n8xWUB-hksBTWHbMwMDHHuUEz-MsSxhfd1ZeL8seHBdkKcgOfMUsFj7c6JcQ");'></div>
+<div class="flex-1 w-full">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-snug">Pro Tablet 11"</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">256GB | Silver | Wi-Fi</p>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex items-center gap-1 bg-primary/5 dark:bg-primary/10 rounded-lg p-1 border border-primary/10">
+<button class="h-8 w-8 flex items-center justify-center rounded-md hover:bg-primary/20 text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-10 text-center bg-transparent border-none focus:ring-0 font-bold text-slate-900 dark:text-slate-100" readonly="" type="number" value="1"/>
+<button class="h-8 w-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<p class="text-xl font-black text-primary">$799.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Summary Sidebar -->
+<aside class="w-full lg:w-[400px]">
+<div class="glass-effect rounded-2xl p-6 lg:p-8 sticky top-24 border border-primary/20">
+<h2 class="text-xl font-bold mb-6 text-slate-900 dark:text-slate-100">Order Summary</h2>
+<div class="space-y-4 mb-6 pb-6 border-b border-primary/10">
+<div class="flex justify-between text-slate-600 dark:text-slate-400">
+<span>Subtotal</span>
+<span class="font-medium text-slate-900 dark:text-slate-100">$1,276.00</span>
+</div>
+<div class="flex justify-between text-slate-600 dark:text-slate-400">
+<span>Estimated Shipping</span>
+<span class="font-medium text-primary">FREE</span>
+</div>
+<div class="flex justify-between text-slate-600 dark:text-slate-400">
+<span>Estimated Tax</span>
+<span class="font-medium text-slate-900 dark:text-slate-100">$102.08</span>
+</div>
+</div>
+<div class="flex justify-between items-end mb-8">
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold">Total</p>
+<p class="text-4xl font-black text-slate-900 dark:text-slate-100">$1,378.08</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="relative group">
+<input class="w-full bg-primary/5 border border-primary/20 rounded-xl px-4 py-3 text-sm focus:ring-primary focus:border-primary" placeholder="Promo code" type="text"/>
+<button class="absolute right-2 top-1.5 px-3 py-1.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold rounded-lg">Apply</button>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-xl shadow-primary/20 transition-all flex items-center justify-center gap-2 group">
+                                Proceed to Checkout
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="text-center text-xs text-slate-400 dark:text-slate-500 px-4">
+                                Shipping, taxes, and discounts will be calculated during the final checkout step.
+                            </p>
+</div>
+<div class="mt-8 flex justify-center gap-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+<span class="material-symbols-outlined text-3xl">credit_card</span>
+<span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+<span class="material-symbols-outlined text-3xl">contactless</span>
+</div>
+</div>
+<div class="mt-6 p-4 rounded-xl bg-primary/5 dark:bg-primary/10 border border-primary/10 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<div>
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">Secure Payment Guaranteed</p>
+<p class="text-[10px] text-slate-500 dark:text-slate-400">Your data is protected by industry-standard SSL encryption.</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Related Items Section -->
+<section class="px-4 md:px-10 lg:px-40 py-16 bg-primary/5">
+<h2 class="text-2xl font-bold mb-8 text-slate-900 dark:text-slate-100">You might also like</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Related 1 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-primary/10 group cursor-pointer hover:shadow-xl transition-all">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl mb-4 group-hover:scale-105 transition-transform" data-alt="Elegant smart watch with white band" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB3f_HkfiVCgFGy7xl6QLTycc1Vb75W4os5FGnCUpzu3Psr2cGxxbcQDtflv6r1-OcBmEdVgbix_IwXN7s74G-WIq5UFGrdw-4xfUOYhr1k080IyRrhL8-cYJAc2zOSeF4dsgHKv8RkP1YGo4KGznuXBzQjWdz7YQ9orOS5pMlaAWwxni1hOuzudS0qvXXSknsZHUEz-BdjI3Ci3l0wcnqvTljumUb2Vmocf7sl99NIEIuh3Ri4H2hx-zSzyigBqRIjllsea_1t2g");'></div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 truncate">Sleek Smart Watch</h4>
+<p class="text-primary font-black mt-1">$199.00</p>
+<button class="mt-4 w-full py-2 bg-primary/10 text-primary font-bold rounded-lg text-sm hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
+</div>
+<!-- Related 2 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-primary/10 group cursor-pointer hover:shadow-xl transition-all">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl mb-4 group-hover:scale-105 transition-transform" data-alt="High resolution ergonomic computer monitor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdwPojCgkI2e0imQ0VVIZvwFwRAkGhUcjp4Qt1muR-jxN62dS4BHl2UxREAnxmHhLpSS9nU0ZRGwNwYX5sG8nQLbBXQrSaeu-uzzvDoHRVdlWFTc1t7dck3Ds-KqyN8217hU1p0-qrXo3GUqXa9jqerGDCk7xDHfHnJzyQw_rGEJ9YxKKhSACJWexjkX4rtWW42PlEBor01X1619jjFAVBh_oBkxBXGcePxN6fLjfBpxApW1_hMDlR3yO3kF6vIu0NjN91MvHiPA");'></div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 truncate">4K Studio Monitor</h4>
+<p class="text-primary font-black mt-1">$549.00</p>
+<button class="mt-4 w-full py-2 bg-primary/10 text-primary font-bold rounded-lg text-sm hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
+</div>
+<!-- Related 3 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-primary/10 group cursor-pointer hover:shadow-xl transition-all">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl mb-4 group-hover:scale-105 transition-transform" data-alt="Wireless ergonomic computer mouse" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCuU6B5r5PV8E3qILk8TufhEK7FykgEejjPEqeLAoE_tuHpMe11Bwn4lAQ3hBXcGngx07wlJyXrIaxY3dJS_m7Bkm6ezbIv13Flfj44vO4OqLhLWfh8KCKOO5xB29HJ3YxGZK2fWKzHaXoHKHC2jeQghGaFVZi0H1I79igIPrLnada1wdh_wE1JkdYjCE7v4dsGhaMlJydU0T1vqBuW0TvqFhlHojqUQOLuR77OVCUoMygnq1vsGPzJPWRN1-Buy8vKJTqNrLhLuQ");'></div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 truncate">Precision Mouse</h4>
+<p class="text-primary font-black mt-1">$79.00</p>
+<button class="mt-4 w-full py-2 bg-primary/10 text-primary font-bold rounded-lg text-sm hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
+</div>
+<!-- Related 4 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-primary/10 group cursor-pointer hover:shadow-xl transition-all">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl mb-4 group-hover:scale-105 transition-transform" data-alt="Sleek aluminum laptop stand" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAeMpmHKIkVjnN68bK4wv2FW35iQEP6qNXZfwL0HT9_EoRJE_qH1UgrFB7XQ2qUgSDzGnDM2ToaeyNwMKAdl5aMeP-_mEbvKrmHPqJxfajldi5-iPDPcrcAuKLdsFQgPgc9xJbKwMdjgF7CUDDtVidTamIfHvoZakhtpBePxFJBnfUbGDDuk2p_yfO1PgNG7PukoKL5L6ey4ytsAxxEvjtCxVNoVeGUnVsiSRQDhrtz5dRoipYJgp2QsNLC3E3OEuMrlQPOquZ8sA");'></div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 truncate">Aluminum Laptop Stand</h4>
+<p class="text-primary font-black mt-1">$45.00</p>
+<button class="mt-4 w-full py-2 bg-primary/10 text-primary font-bold rounded-lg text-sm hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-background-light dark:bg-background-dark border-t border-primary/10 py-12 px-4 md:px-10 lg:px-40">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-2xl font-bold">shopping_bag</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Stuffus</h2>
+</div>
+<div class="flex gap-8 text-sm font-medium text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+<a class="hover:text-primary" href="#">Shipping Info</a>
+<a class="hover:text-primary" href="#">Contact Us</a>
+</div>
+<div class="text-xs text-slate-400">
+                    © 2024 Stuffus Inc. All rights reserved.
+                </div>
+</div>
+</footer>
+</div>
+</body></html>

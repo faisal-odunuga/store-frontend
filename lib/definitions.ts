@@ -18,12 +18,36 @@ export interface Product {
   discountPrice?: number | null;
   costPrice?: number;
   weight?: number | null;
+  lowStockAlert?: number | null;
+  isActive?: boolean;
   barcode?: string | null;
   stock: number;
-  imageUrl?: string | null;
+  imageUrl?: string | null; // legacy single image
+  images?: string[]; // new gallery, empty array when none
+  specs?: Record<string, any> | string[] | null;
   category?: string | null;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface ProductQueryParams {
+  search?: string;
+  category?: string;
+  sort?: 'price_asc' | 'price_desc' | 'newest' | 'oldest';
+  page?: number;
+  limit?: number;
+  minPrice?: number;
+  maxPrice?: number;
+  inStock?: boolean;
+  isActive?: boolean;
+}
+
+export interface ProductListResponse {
+  products: Product[];
+  total: number;
+  page: number;
+  totalPages: number;
+  categories?: string[];
 }
 
 export interface CartItem {
@@ -57,6 +81,9 @@ export interface Order {
   user: Pick<User, 'id' | 'name' | 'email' | 'phone'>;
   totalAmount: number;
   shippingAddress?: string;
+  contactName?: string | null;
+  contactEmail?: string | null;
+  contactPhone?: string | null;
   status: 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED' | 'REFUNDED';
   createdAt: string;
   updatedAt: string;
@@ -73,6 +100,19 @@ export interface Review {
     id: string;
     name: string;
   };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Address {
+  id: string;
+  userId: string;
+  street: string;
+  city: string;
+  state?: string | null;
+  postalCode: string;
+  country: string;
+  isDefault: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -100,4 +140,15 @@ export interface StatsResponse {
   orders: number;
   products: number;
   revenue: number;
+}
+
+export interface CreateOrderPayload {
+  items: { productId: string; quantity: number }[];
+  shippingAddress?: string;
+  addressId?: string;
+  contactName?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  paymentMethod?: string;
+  discountAmount?: number;
 }

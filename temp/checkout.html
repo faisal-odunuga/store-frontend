@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout - Stuffus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Public Sans", sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="layout-container flex flex-col items-center">
+<!-- Header -->
+<header class="w-full max-w-[1200px] flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-6 py-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl">star_rate</span>
+<h2 class="text-xl font-bold tracking-tight">Stuffus</h2>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Categories</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Offers</a>
+</nav>
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4gVpDY0t4Hg1bmxI2PRdj3ZXsmhZS-Nt5-xNCBLDWt1QtlsYEGNO1ms0z4TY3ZIWLezmsKN-fDi69Guf6zdhhS6Z0IrmGDcrcZgY3eNPTbPk2jxPZGpQXXsQ-4ZnPYKZ_xNTeTDTS7MFF9xamtbWXRQqn18tQhS0iBPriK92Hmb1iS8B345cslz1ASis6fONAulIou3S2GwGeMZ-auxuS7WwCvQ_fcSFOSrgVhXF3cQQmUBqZem-CUWfaqoszpwx5VxtDRCsmng"/>
+</div>
+</div>
+</header>
+<main class="w-full max-w-[960px] px-6 py-10">
+<!-- Progress Stepper -->
+<div class="mb-10">
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-2">
+<span class="text-primary font-bold">Shipping</span>
+<span class="material-symbols-outlined text-slate-400 text-sm">chevron_right</span>
+<span class="text-slate-400">Review</span>
+<span class="material-symbols-outlined text-slate-400 text-sm">chevron_right</span>
+<span class="text-slate-400">Payment</span>
+</div>
+<span class="text-sm font-medium text-primary">Step 1 of 3</span>
+</div>
+<div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/3 transition-all"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<!-- Main Form Column -->
+<div class="lg:col-span-2 space-y-8">
+<section>
+<h1 class="text-3xl font-bold mb-2">Shipping Information</h1>
+<p class="text-slate-500 dark:text-slate-400 mb-8">Enter your delivery details to proceed with the order.</p>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">First Name</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="John" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">Last Name</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="Doe" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">Email Address</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="john.doe@example.com" type="email"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">Street Address</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="123 Main Street" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">City</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="Lagos" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">State</label>
+<select class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary">
+<option>Lagos</option>
+<option>Abuja</option>
+<option>Rivers</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">Postal Code</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="100001" type="text"/>
+</div>
+</div>
+<div class="pt-6">
+<button class="w-full md:w-auto px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2" type="button">
+                                    Proceed to Review
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</form>
+</section>
+</div>
+<!-- Order Summary Sidebar -->
+<div class="lg:col-span-1">
+<div class="bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sticky top-8">
+<h3 class="text-lg font-bold mb-6">Order Summary</h3>
+<div class="space-y-4 mb-6">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Red Nike running shoes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdRof0Z4HFmy1P8a1GXcpJhx1RdlnskmiLTcoyx9w0H-iDKT2JYO7zNTTcWn-luUqXbXe5fobamEmfxIZgsFzs9wsIiUk-WqJc6xwz0cMiZRdW41foT5bhv3RoSzhiH08fS_s8F1lKKk0CAE43J-StDOcMsaQjd9RNKMYCnCYQs-MGa1SykD-2wIffnEnYHBtBQarN_hVC5rBdiobMcb6E4U0rsoAELEEdjianb2hJBLj5nudRRDln84jbizL9TENS5NcohyULXw"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Stuffus Air Max</p>
+<p class="text-xs text-slate-500">Size: 42 | Color: Red</p>
+<p class="text-sm font-bold mt-1">₦45,000</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Minimalist wrist watch white dial" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkhEHuwLNjEG5HjUSAErzg2xz3R7dEg2k1mPr61y7E0quQX3rUuB3vT-5SyDTUGQj2jmbxRd7mC0htQ7N4eF6es7iZPttasSrtSje8awUvY4_5CdugGyPYlYa0Kidk_k_NOkI10jIk5AKCm8t6ldvzcXn6XMEcJwK-tBDOZKuFIiN-wtj3rQP6r817ctF23x_dMgfmNl_pgFLLJmqMiQCrMeYMZ14-pvdMxr7Z-oBaBBLAlprmcC2i6diqxGbk17kwuHNcEiM7cQ"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Stuffus Classic Watch</p>
+<p class="text-xs text-slate-500">Edition: Midnight</p>
+<p class="text-sm font-bold mt-1">₦22,500</p>
+</div>
+</div>
+</div>
+<hr class="border-slate-200 dark:border-slate-800 mb-6"/>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Subtotal</span>
+<span>₦67,500</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Shipping</span>
+<span class="text-green-600">Free</span>
+</div>
+<div class="flex justify-between text-lg font-bold pt-3 border-t border-slate-100 dark:border-slate-800">
+<span>Total</span>
+<span>₦67,500</span>
+</div>
+</div>
+<!-- Paystack Integration Mention -->
+<div class="bg-primary/5 dark:bg-primary/10 rounded-lg p-4 border border-primary/20 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">lock</span>
+<div class="text-xs">
+<p class="font-bold text-primary">Secure Checkout</p>
+<p class="text-slate-600 dark:text-slate-400">Powered by <strong>Paystack</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Info -->
+<footer class="w-full max-w-[960px] px-6 py-8 mt-10 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-slate-500">© 2024 Stuffus Inc. All rights reserved.</p>
+<div class="flex items-center gap-6">
+<a class="text-xs text-slate-500 hover:underline" href="#">Terms of Service</a>
+<a class="text-xs text-slate-500 hover:underline" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-500 hover:underline" href="#">Help Center</a>
+</div>
+</footer>
+</div>
+</body></html>

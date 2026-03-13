@@ -1,0 +1,1530 @@
+<!-- Product Catalog - Desktop -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stuffus Electronics Boutique - Premium Catalog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+        .product-card:hover .quick-look {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex h-20 items-center justify-between gap-8">
+<!-- Logo -->
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">flare</span>
+<h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">Stuffus</h2>
+</div>
+<!-- Nav Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">New Arrivals</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Audio</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Computing</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Accessories</a>
+</nav>
+<!-- Search and Icons -->
+<div class="flex flex-1 items-center justify-end gap-6">
+<div class="hidden lg:block relative w-full max-w-xs">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-xl focus:ring-2 focus:ring-primary text-sm" placeholder="Search boutique..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute top-1 right-1 size-2 bg-primary rounded-full"></span>
+</button>
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="User profile circular avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDskByFpCgZSEio_jayIogacvgd56G91hal36w5M9bM6apZH5NRpNfchtqsN22-cYHqBxXv7I4vpA__YdUScXKIR_jKVaFM-4ccCEl4xmi0TEuzZ1YitHxsZw2LQw53FvcY9wIZxPNzw0JH_BAvEGgigb2iFtf1iL1PDgWK7h2yTo5w4mVLYlSFZRenS2BNRZ4IYRPgiY8vNUH-WN2E7GsM4A9_9NBywlQ9Hf0sp1hEyuIhD04YfRanQN1mhYW5dzSM02z0rUb2cw"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-8">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-primary" href="#">Electronics</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-medium">Premium Audio</span>
+</nav>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="sticky top-28">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold">Filters</h3>
+<button class="text-xs text-primary font-semibold hover:underline">Reset All</button>
+</div>
+<!-- Categories -->
+<div class="mb-8">
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Category</h4>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">Over-Ear Headphones</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">True Wireless</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">Studio Monitors</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm group-hover:text-primary transition-colors">Amplifiers</span>
+</label>
+</div>
+</div>
+<!-- Price Range -->
+<div class="mb-8">
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Price Range</h4>
+<div class="px-2">
+<input class="w-full h-1 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<div class="flex justify-between mt-4">
+<span class="text-xs font-mono">$100</span>
+<span class="text-xs font-mono">$5,000</span>
+</div>
+</div>
+</div>
+<!-- Stock Availability -->
+<div class="mb-8">
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Availability</h4>
+<div class="flex items-center justify-between p-3 rounded-xl bg-slate-100 dark:bg-slate-800">
+<span class="text-sm font-medium">In Stock Only</span>
+<button class="relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center rounded-full bg-primary transition-colors duration-200 focus:outline-none">
+<span class="translate-x-5 inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200"></span>
+</button>
+</div>
+</div>
+<!-- Brand -->
+<div class="mb-8">
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Brand</h4>
+<div class="relative">
+<input class="w-full text-xs py-2 px-3 bg-transparent border-b border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-0 mb-3" placeholder="Search brands..." type="text"/>
+<div class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar">
+<label class="flex items-center gap-2 text-sm"><input class="rounded border-slate-300 text-primary" type="checkbox"/> Sennheiser</label>
+<label class="flex items-center gap-2 text-sm"><input class="rounded border-slate-300 text-primary" type="checkbox"/> Focal</label>
+<label class="flex items-center gap-2 text-sm"><input class="rounded border-slate-300 text-primary" type="checkbox"/> Sony</label>
+<label class="flex items-center gap-2 text-sm"><input class="rounded border-slate-300 text-primary" type="checkbox"/> Audio-Technica</label>
+<label class="flex items-center gap-2 text-sm"><input class="rounded border-slate-300 text-primary" type="checkbox"/> Bang &amp; Olufsen</label>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Product Grid Section -->
+<div class="flex-1">
+<!-- Toolbar -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+<div>
+<h1 class="text-4xl font-black tracking-tight mb-1">Premium Audio</h1>
+<p class="text-slate-500 dark:text-slate-400">Showing 24 of 142 masterpieces</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
+<button class="p-2 rounded-md bg-white dark:bg-slate-700 shadow-sm text-primary">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 rounded-md text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">view_list</span>
+</button>
+</div>
+<select class="bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm font-medium focus:ring-2 focus:ring-primary py-2.5 pl-4 pr-10">
+<option>Sort: Featured</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Newest Arrivals</option>
+</select>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Product Card 1 -->
+<div class="product-card group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Black premium over-ear studio headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoj-kgF5WqJVUoyQoB60UAfJtCmcI--F4zziwFChZTT0CtfIFfQ-ONvKe_SAWb10roS6xVZaZeNJa_1IS5Z4zaLOuUtLVwhM5rsuOH7DMnnIITGejQYLZ3XdDCkTsdprf0GmWLuJblGo27-7HX_fkQbThXrzQjo0TSM0nWsi22Sfdvk_z75Zoj4Gxmbm9ZbG5q325U-nGqydUVQiLLZGwCNlPk5OECfYU6HGvIwfB8ipXBqWYmEil3mfdk3e1WNLsKAc5xbzeTMQ"/>
+<div class="quick-look absolute inset-x-0 bottom-0 p-4 opacity-0 translate-y-4 transition-all duration-300">
+<button class="w-full py-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-slate-900 dark:text-white font-bold rounded-lg shadow-lg hover:bg-primary hover:text-white transition-colors">
+                                    Quick Look
+                                </button>
+</div>
+<span class="absolute top-4 left-4 bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">New</span>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Sennheiser</p>
+<h3 class="text-lg font-bold">HD 660S2 Open-Back</h3>
+</div>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="text-xs text-slate-400 ml-1">(48)</span>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-xl font-black">$599.00</p>
+<button class="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="product-card group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Minimalist wireless silver headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnhXceTebuk0WIL6_wQx6OP05ywuzN_YCVxgM1Qg2y91VJQ1OfSjDIuyYlA51lGTm21VIKmBLbeL9MWCxkWYBamyjAfoxgqU_Vzskst5sY1QJMgz_EAiKl3Ennb5YXLA1YLiv7nmYoozhk4vewbUQC-rI9xPrKBhi4o4Zb-RnHQdG0nvSf4mHU7j057IMcXrLNaFE2Xo2p4vzm1vMUIH6l8URWibn0bmtEF7WqgQC0EfSiYabfQaFNp07fJTpLtYa_eyoa5PJ7hw"/>
+<div class="quick-look absolute inset-x-0 bottom-0 p-4 opacity-0 translate-y-4 transition-all duration-300">
+<button class="w-full py-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-slate-900 dark:text-white font-bold rounded-lg shadow-lg hover:bg-primary hover:text-white transition-colors">
+                                    Quick Look
+                                </button>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Sony</p>
+<h3 class="text-lg font-bold">WH-1000XM5 Silver</h3>
+</div>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-slate-300">star</span>
+<span class="text-xs text-slate-400 ml-1">(1.2k)</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<p class="text-xl font-black">$398.00</p>
+<p class="text-xs text-slate-400 line-through">$449.00</p>
+</div>
+<button class="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="product-card group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High-end studio monitor speakers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC1ylQdcORM1zO8nMzqPzeu1PmYjAy1HGJbtQAxRx8G_yt6kTdKbP-5kfLLKkVuoEOAVp-2_uKSdrcOROpjpsmzta8vupodVe8yzCW9xUEz8r7_6YPDV7Tbva_CZNrO3bPe-ZbcI_J2niA9TAadlmy9RyIM65-vHdMAW6zu7rXs8Cmn-_Pf8wHcbB4lcpNgi6u-23eVDr-ddmloDRMCT6eSXsGqaUFB1r4d2xFIUZugQv-LDJKmdl9j78pTzHo2pJdC1dolgFshg"/>
+<div class="quick-look absolute inset-x-0 bottom-0 p-4 opacity-0 translate-y-4 transition-all duration-300">
+<button class="w-full py-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-slate-900 dark:text-white font-bold rounded-lg shadow-lg hover:bg-primary hover:text-white transition-colors">
+                                    Quick Look
+                                </button>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Focal</p>
+<h3 class="text-lg font-bold">Shape 65 Studio Monitor</h3>
+</div>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="text-xs text-slate-400 ml-1">(24)</span>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-xl font-black">$999.00</p>
+<button class="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="product-card group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Premium wooden finish bookshelf speakers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVZDpgKCYmvDCcHv67gKXn-DJXpz6nB4t5CA1fR4reVtu_JtI2fXnMbk4LdzqyA84xdH3rBNmo3IxsTRkVGQw940mWss5PK5-xtal8B6iYYsJHr-orp9c1dDqYPRQ76rkfxzGJdwJQMQF75Tui_hjKEsDPT-rvHuO1hQAglExGZmzjV3JvGj1HROhsXywr_OrrpMIv5im4RFrCdVWdF7QvMnYyvumTYOJvHElDkG6AqNPFaXEK1iFXGxILMrl2Zm6o6TcrxTJUoA"/>
+<div class="quick-look absolute inset-x-0 bottom-0 p-4 opacity-0 translate-y-4 transition-all duration-300">
+<button class="w-full py-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-slate-900 dark:text-white font-bold rounded-lg shadow-lg hover:bg-primary hover:text-white transition-colors">
+                                    Quick Look
+                                </button>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Klipsch</p>
+<h3 class="text-lg font-bold">Heritage The Three II</h3>
+</div>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-slate-300">star</span>
+<span class="text-xs text-slate-400 ml-1">(85)</span>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-xl font-black">$479.00</p>
+<button class="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="product-card group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High fidelity vacuum tube amplifier" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDibBTMGR_GbFXanU4jo9Wo0ftoDo9b-CxX_VOwf_tePAxSvkJ2Mlemrh3cKHfIczs1U5V14AAnYjujQ3FbgNL4AIRFHOjY6pIkVceaC4LEy65X7lKJGHmEn5J3m3hScD2SZLNd62xyAiddeGnn4D8xXqety3Q6eU7D2gIgF-VRVfBwpwveuuWcWjZXCUvnFMia4FW6GKuWte-gNIach96_NnxbCiKDZtJRXBPc7wGKFDsb49MNPOhVRoWWpuLAdw4TTM08hIPsg"/>
+<div class="quick-look absolute inset-x-0 bottom-0 p-4 opacity-0 translate-y-4 transition-all duration-300">
+<button class="w-full py-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-slate-900 dark:text-white font-bold rounded-lg shadow-lg hover:bg-primary hover:text-white transition-colors">
+                                    Quick Look
+                                </button>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">McIntosh</p>
+<h3 class="text-lg font-bold">MA252 Integrated Amp</h3>
+</div>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="text-xs text-slate-400 ml-1">(12)</span>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-xl font-black">$3,500.00</p>
+<button class="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="product-card group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Classic black over-ear headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoDQ3_caJwygaLSbTXPv85SorJzMgMvMm1Q10KOkrl6nketRp3GlpqtLkdZr_LRCH67dt92VVq5JrSPml6QNpZd8WGauGk6iwmRH77FE-fWAgnybA4kbNInh-gk3nLbQd59j05Q140DvFyhAXC3X_yk1p9ntCHidvs00XFHZjp0Eb-YPo4F_R7YqHS8eNBtawOBTQaALRs4FafCnsithWw4LVz2gZYL-pEL8uPOnJxaGtq921cuDyfi_i6tXZLl43MrjxIw7s1Aw"/>
+<div class="quick-look absolute inset-x-0 bottom-0 p-4 opacity-0 translate-y-4 transition-all duration-300">
+<button class="w-full py-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-slate-900 dark:text-white font-bold rounded-lg shadow-lg hover:bg-primary hover:text-white transition-colors">
+                                    Quick Look
+                                </button>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Beyerdynamic</p>
+<h3 class="text-lg font-bold">DT 1990 PRO Studio</h3>
+</div>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-sm text-slate-300">star</span>
+<span class="text-xs text-slate-400 ml-1">(210)</span>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-xl font-black">$529.00</p>
+<button class="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-center gap-2 mt-16">
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">2</button>
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">3</button>
+<span class="px-2">...</span>
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">12</button>
+<button class="size-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="mt-20 border-t border-slate-200 dark:border-slate-800 py-12 bg-white dark:bg-slate-900/50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2 text-primary opacity-50">
+<span class="material-symbols-outlined text-2xl">flare</span>
+<h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Stuffus</h2>
+</div>
+<div class="flex gap-10 text-sm font-medium text-slate-500">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+<a class="hover:text-primary" href="#">Shipping Info</a>
+<a class="hover:text-primary" href="#">Contact Us</a>
+</div>
+<div class="flex gap-4">
+<button class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+<svg class="size-4" fill="currentColor" viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+</button>
+<button class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+<svg class="size-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</button>
+</div>
+</div>
+<p class="text-center mt-12 text-xs text-slate-400">© 2024 Stuffus Boutique. All rights reserved.</p>
+</div>
+</footer>
+</body></html>
+
+<!-- Product Detail - Desktop -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stuffus | The Signature Lounge Chair</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .sticky-panel { top: 2rem; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">star_half</span>
+<h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Stuffus</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Collections</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Sustainability</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Journal</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/60">search</span>
+<input class="pl-10 pr-4 py-2 bg-primary/5 border-none rounded-full text-sm w-64 focus:ring-2 focus:ring-primary" placeholder="Search furniture..." type="text"/>
+</div>
+<button class="p-2 hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+<button class="p-2 hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-8">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary" href="#">Furniture</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100">The Signature Lounge Chair</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Immersive Image Gallery -->
+<div class="lg:col-span-8 space-y-4">
+<div class="aspect-[4/5] bg-primary/5 rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Main shot of minimalist oak lounge chair with cream upholstery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI4kRLSO7C62B4DM2GuGqt4ik0WczECTnqZzSrrSf3zT54HwNdklR8sl6S3rLah5NE9p62LEup-mTjYp88dWdbCoTCTZm2Gyn1pdBw8VLmMPaS6Pqj-4SZeJzmSTplFXPsQpH4xqUBNOXBAeUxEH-tAn1JsVLUDzN9Pxa7cHZOrNggWRBCiHvK7qTOX5vJY9G5xGV1gJM_X-22l-oheKbl0qizyE1M-80gWuQyPi0aqJGdpethnzw-qn2itZsoUADJxCXTLqmqKg"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-square bg-primary/5 rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up detail of oak wood grain and joinery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSV_2iyATbBryVxDBOOwnDIHCmLSDwguEfw_mNDSEmotlZaOH4K9kCU_J9xlfONiXj0TzbVWPe1PEs-4JgXzpvNZiwS6snLQRdibekQJOr0Fr-XtojewxJVfe0lCd8UuxzE3izNxqoxLYIScXsS0dPBg6V2OA90n8TvhDRzhD9Ro2J0NyMDvWdn8DmNSRYAYo4RRplXvD-oPG4DDANiQnJwsoK5YHFV_3lvMfD20uTcFTrEBgYw9mUFrKGOntgQxkUkEVGUrqxyg"/>
+</div>
+<div class="aspect-square bg-primary/5 rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Lifestyle shot of lounge chair in a modern sunlit living room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7ijAnZuQ9A-iMnomQE2KFRsIQuva8Q5MdHoARrq290rHjBVaypIoO0a2J_27E4vfJ6sU_fKH_xDK9xJQWzEI85KQhHSnbeciQccHS2wFArEp2rmR-JVwfNVjzZ8WPj62xCc9-jXqtdMV9YFV4xm_w-v7yDphgp7c3ZWKjm-HpQLRJE0yB-Cdg4a32jxMtlx59YtjqbDFryjTpQJumfSfBE0Rnt_nXo2BBdwFqOSw7A17OOMnQO515IrxpFS92TbooytgoZLILEw"/>
+</div>
+</div>
+<div class="aspect-[16/9] bg-primary/5 rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Wider editorial shot showing chair silhouette and environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoSTTAk-mV8K6kEG1kqXLOouo4wzWtC5-CyFP3etw0QAnOeLlGKiPlkCqz5BKdm0zKlRgo57j6pMRrmUgNUNYDcOi6_xMbi8YA1FumUk6bcYm_MBBrMx_7IlmzOLMh7XZwtBmWyBOU8OeZrUJOsH_0dGocIqMtl80eL2AptAwOVyBhVMgsggAWi457nakHI8bqdrBWAQPiorREkL9FtbVnbXpRCbt916ejXTvHdbR8zXV0RXk-7yM24iO9qT1PEP_SuLJnUilg9Q"/>
+</div>
+</div>
+<!-- Sticky Purchase Panel -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 space-y-8">
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-wider rounded">Bestseller</span>
+<div class="flex items-center text-primary">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm">star_half</span>
+<span class="ml-2 text-xs font-medium text-slate-500">4.8 (124 reviews)</span>
+</div>
+</div>
+<h2 class="text-4xl font-bold tracking-tight">The Signature Lounge Chair</h2>
+<p class="text-2xl font-light text-primary">$1,250.00</p>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            A masterclass in minimalist design, combining ergonomic comfort with sustainably sourced oak and premium, heavy-duty upholstery for lifelong durability.
+                        </p>
+</div>
+<div class="space-y-6 border-t border-primary/10 pt-8">
+<div>
+<span class="text-xs font-bold uppercase tracking-widest block mb-4">Select Finish</span>
+<div class="flex gap-4">
+<button class="w-12 h-12 rounded-full ring-2 ring-primary ring-offset-2 bg-[#d4b08c]" title="Natural Oak"></button>
+<button class="w-12 h-12 rounded-full bg-[#4a3728] hover:ring-2 hover:ring-primary/40 ring-offset-2 transition-all" title="Smoked Oak"></button>
+<button class="w-12 h-12 rounded-full bg-[#1a1a1a] hover:ring-2 hover:ring-primary/40 ring-offset-2 transition-all" title="Ebonized Black"></button>
+</div>
+</div>
+<div>
+<span class="text-xs font-bold uppercase tracking-widest block mb-4">Upholstery</span>
+<div class="grid grid-cols-2 gap-2">
+<button class="px-4 py-3 border border-primary text-primary bg-primary/5 text-sm font-semibold rounded-lg">Bouclé Cream</button>
+<button class="px-4 py-3 border border-slate-200 dark:border-slate-800 text-sm font-semibold rounded-lg hover:border-primary transition-colors">Tweed Grey</button>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-5 rounded-xl transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">shopping_cart</span>
+                                Add to Cart — $1,250.00
+                            </button>
+<p class="text-center text-xs text-slate-500 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">local_shipping</span>
+                                Free white-glove delivery in 2-4 weeks
+                            </p>
+</div>
+</div>
+<div class="bg-primary/5 p-6 rounded-xl space-y-4">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary">eco</span>
+<div>
+<h4 class="font-bold text-sm">Sustainably Crafted</h4>
+<p class="text-xs text-slate-600 dark:text-slate-400">FSC certified European white oak and recycled textiles.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary">verified</span>
+<div>
+<h4 class="font-bold text-sm">Lifetime Warranty</h4>
+<p class="text-xs text-slate-600 dark:text-slate-400">Guaranteed against structural manufacturing defects.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Specifications Section -->
+<section class="mt-24 py-16 border-t border-primary/10">
+<div class="max-w-3xl">
+<h3 class="text-2xl font-bold mb-8">Technical Specifications</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+<div class="flex justify-between py-3 border-b border-primary/5">
+<span class="text-slate-500 font-medium">Height</span>
+<span>78 cm</span>
+</div>
+<div class="flex justify-between py-3 border-b border-primary/5">
+<span class="text-slate-500 font-medium">Width</span>
+<span>68 cm</span>
+</div>
+<div class="flex justify-between py-3 border-b border-primary/5">
+<span class="text-slate-500 font-medium">Depth</span>
+<span>82 cm</span>
+</div>
+<div class="flex justify-between py-3 border-b border-primary/5">
+<span class="text-slate-500 font-medium">Seat Height</span>
+<span>42 cm</span>
+</div>
+<div class="flex justify-between py-3 border-b border-primary/5">
+<span class="text-slate-500 font-medium">Weight Capacity</span>
+<span>150 kg</span>
+</div>
+<div class="flex justify-between py-3 border-b border-primary/5">
+<span class="text-slate-500 font-medium">Material</span>
+<span>Solid Oak, Foam, Fabric</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Style It With -->
+<section class="mt-24">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h3 class="text-2xl font-bold">Style it with</h3>
+<p class="text-slate-500">Curated pieces to complete your living space.</p>
+</div>
+<a class="text-primary font-bold text-sm flex items-center gap-1 hover:underline" href="#">
+                    Shop the collection
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Rec 1 -->
+<div class="group">
+<div class="aspect-[3/4] bg-primary/5 rounded-xl overflow-hidden mb-4 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Handwoven wool floor lamp with oak base" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOfGUuFTbiVYjRLxQW-ZpobQPkevrEqkRKvZ1-Ejh_-xLzGa9Zr4VY3nXZStNdUaLZIWdLTio3e7exx6CRXYbLVSa4UMFrE3KLBpbspDKbkb6Wp2hPfv7k2Qb2KL7R7WFSup5r1jn2MxykzZ3i7k4p-E77B75mtCVTpGbF9C44L71OvcJI-SW0hclpKscc9tAecBiUQVTdhG0mb3k4btyHO7QRUOkWKcT8XNH1x6AXuNy-q3kRpM6S2yGlCMhXro7xqUzTQCxb-g"/>
+<button class="absolute bottom-4 right-4 bg-white text-slate-900 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<h4 class="font-bold">The Nordic Floor Lamp</h4>
+<p class="text-slate-500 text-sm">$320.00</p>
+</div>
+<!-- Rec 2 -->
+<div class="group">
+<div class="aspect-[3/4] bg-primary/5 rounded-xl overflow-hidden mb-4 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Nesting side tables in dark oak finish" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE50C-Yq8m1y8rqZU73RU1F64COj9tf6erruU-MIVIqn4yT87wQxDlhSuOJz5vn1O0A6Z-A8ezryoysmHpxSR_ZwcknliCYhueH9wDShTa1qNkYCAvcMnDpiBusY265bSOqzKW_iAi1JVkooflLo8o2jh3kn8D7reb2bfrkRa9jxHOfvejSachZvbVRM9mqGPzVKXCPC4HLlA_IvScGmVp2yZP-ITDBafjEIQPR3sWJEE0DkDdabQ8t7TaTFPc6v0vMQ75Qch0Vg"/>
+<button class="absolute bottom-4 right-4 bg-white text-slate-900 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<h4 class="font-bold">Orbit Nesting Tables</h4>
+<p class="text-slate-500 text-sm">$480.00</p>
+</div>
+<!-- Rec 3 -->
+<div class="group">
+<div class="aspect-[3/4] bg-primary/5 rounded-xl overflow-hidden mb-4 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Textured geometric area rug in neutral tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkS2SuhF7aapAvtMyAhh5nfcjwNpqv3lVYx3Jfu0lzMgAmYx4BQm6y5syvPBIYbYthhEU55BVjorkfyQXDxw4FmjKSE4UVPS5eY65jzHZ1jBIL4TpBV-6gv352OlQigTWXf-YFNqn5BR97TeVuJa7MeAuGPsmesg4u-_9IQf0cfGesP5qx5hZ7d4TCUxQwSOxT2hQdg5_utkgaYAszW7EMxYUEWe_R-9Aa9Kht_3OgCXWlOwI90EpNy9KXHxFUto4uVjmoEUNFZQ"/>
+<button class="absolute bottom-4 right-4 bg-white text-slate-900 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<h4 class="font-bold">Tactile Wool Rug</h4>
+<p class="text-slate-500 text-sm">$890.00</p>
+</div>
+<!-- Rec 4 -->
+<div class="group">
+<div class="aspect-[3/4] bg-primary/5 rounded-xl overflow-hidden mb-4 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Hand-thrown ceramic vase with organic shape" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBof1LOuu1Y0UjlD7nVlQj3c5ru3F8gPw2tUKmLBaO8ctxBH2gnSmbaPDi65CCehjmuZmx1rQyjKmtdCvfV3oSb6devFxPP66I1gMca8wC25YcMhYgDNxAzapkJLKMZBjt7vRIHLdWYu9UNCL3OtMB9yCV7-Mt-yRTCnanryUrGdS0kkXyP1aj8lmXVvuRv41e9Vj6KbtXdZWemnDOZf0wYiUk5P8CidHTt9B2dmUU3apjZGzTwy0faU0dDex-qrxbxx3evih3rLg"/>
+<button class="absolute bottom-4 right-4 bg-white text-slate-900 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<h4 class="font-bold">Fjord Ceramic Vase</h4>
+<p class="text-slate-500 text-sm">$125.00</p>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="mt-24 pt-16 border-t border-primary/10">
+<div class="flex flex-col md:flex-row gap-12">
+<div class="md:w-1/3">
+<h3 class="text-3xl font-bold mb-4">Customer Stories</h3>
+<div class="flex items-center gap-4 mb-6">
+<div class="text-5xl font-bold">4.8</div>
+<div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="material-symbols-outlined fill-1">star</span>
+</div>
+<p class="text-sm text-slate-500">Based on 124 reviews</p>
+</div>
+</div>
+<button class="w-full py-3 border border-slate-900 dark:border-slate-100 font-bold rounded-lg hover:bg-slate-900 hover:text-white dark:hover:bg-slate-100 dark:hover:text-slate-900 transition-all">
+                        Write a review
+                    </button>
+</div>
+<div class="md:w-2/3 space-y-10">
+<!-- Review Item 1 -->
+<div class="border-b border-primary/5 pb-10">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h5 class="font-bold">Eleanor M.</h5>
+<p class="text-xs text-slate-400 uppercase tracking-widest">Verified Buyer — London, UK</p>
+</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+</div>
+</div>
+<p class="text-slate-700 dark:text-slate-300 leading-relaxed italic">
+                            "The craftsmanship is exceptional. I was worried about the comfort of a minimalist design, but the ergonomic curve of the backrest is perfect for long reading sessions."
+                        </p>
+</div>
+<!-- Review Item 2 -->
+<div class="border-b border-primary/5 pb-10">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h5 class="font-bold">David K.</h5>
+<p class="text-xs text-slate-400 uppercase tracking-widest">Verified Buyer — Berlin, DE</p>
+</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+</div>
+<p class="text-slate-700 dark:text-slate-300 leading-relaxed italic">
+                            "Seamless assembly and the delivery team was professional. The bouclé fabric feels incredibly premium and adds so much texture to my lounge."
+                        </p>
+</div>
+<button class="text-primary font-bold text-sm flex items-center gap-1">
+                        View all 124 reviews
+                        <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Simple Footer -->
+<footer class="bg-primary/5 mt-24 py-20 px-6">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-2 space-y-6">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">star_half</span>
+<h2 class="text-xl font-bold">Stuffus</h2>
+</div>
+<p class="max-w-sm text-slate-500">Modern heirlooms for the intentional home. Designed with purpose, built with integrity.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-lg">public</span></a>
+<a class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-lg">share</span></a>
+<a class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-lg">mail</span></a>
+</div>
+</div>
+<div>
+<h6 class="font-bold mb-6">Explore</h6>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">Seating</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Lighting</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Tables</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Accessories</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-bold mb-6">Assistance</h6>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">Shipping &amp; Returns</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Warranty</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">FAQ</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-primary/10 flex flex-col md:flex-row justify-between gap-4 text-xs text-slate-400">
+<p>© 2024 Stuffus Furniture Co. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>
+
+<!-- Shopping Cart - Desktop -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping Cart - Stuffus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(236, 91, 19, 0.1);
+        }
+        .dark .glass-effect {
+            background: rgba(34, 22, 16, 0.7);
+            border: 1px solid rgba(236, 91, 19, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex flex-col w-full min-h-screen overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 glass-effect border-b border-primary/10 px-4 md:px-10 lg:px-40 py-3 flex items-center justify-between whitespace-nowrap">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">shopping_bag</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">Stuffus</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full bg-primary/5 dark:bg-primary/10 border border-primary/10">
+<div class="text-primary/60 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:outline-0 focus:ring-0 placeholder:text-slate-400 text-sm font-normal" placeholder="Search products..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Deals</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Orders</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+<button class="relative flex items-center justify-center rounded-xl h-10 w-10 bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+<span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-slate-900 dark:bg-white text-[10px] text-white dark:text-slate-900 font-bold">3</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User profile avatar portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBV2AXGMv25deZRDFDiQwbLsHb8OXqUgH9kQsqV4aNMEdETqy0JaterYTHvtOqP3CY7d03RKEta-fx6Gre_TMLu_ZFalDMRx3SheIT50g6HsTtfJV9gZBY-4qAdialdySytmqbna7giDizniWWO0ipWsVr5SZ3LNMEO_fFGOPJvpU_uoMhRdwU0CUJzXGzgdXsYoN671HqYJXeFYqS8yU-A_d-mP6SW0Cx9n25-0C07OoxL60dPP2AvHDJD4lq9HKXAa56H791HbQ");'></div>
+</div>
+</header>
+<main class="flex-1 px-4 md:px-10 lg:px-40 py-8">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 mb-8 text-sm font-medium">
+<a class="text-primary hover:underline" href="#">Home</a>
+<span class="text-slate-400">/</span>
+<span class="text-slate-900 dark:text-slate-100">Shopping Cart</span>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Cart Items Section -->
+<div class="flex-1 space-y-6">
+<div class="flex items-end justify-between border-b border-primary/10 pb-4">
+<h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100">Your Cart</h1>
+<p class="text-primary font-medium">3 items selected</p>
+</div>
+<!-- Item 1 -->
+<div class="glass-effect rounded-xl p-4 md:p-6 flex flex-col md:flex-row gap-6 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-32 border border-primary/10" data-alt="Premium wireless noise cancelling headphones" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4h1WgV7sdBlvPVWEn7EoYAxVb17sfSIWp_edZxRJtpZioHQW6mHOaWoxMUaGlhAq33Qi4fKPu9tM1PrjdEZJ4jYzX2HI1-ipfW6vHxgviejpeM_wkOkYD6x2gXOcthpmLfOQXGYN_0Ops-VtfuaDSGrzciD2TRpDFCw5X60ELK1IqMOHuRWuwDHMV8xxhe8xtZoZubxbR8PMoc1UZlsgODC8VUHy5xHXUjHxMN2Iq6Bnd72KXJAlTlucJ4Xz6c8lR4QTmQcO9-g");'></div>
+<div class="flex-1 w-full">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-snug">Premium Wireless Headphones</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Space Gray | Noise Cancelling</p>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex items-center gap-1 bg-primary/5 dark:bg-primary/10 rounded-lg p-1 border border-primary/10">
+<button class="h-8 w-8 flex items-center justify-center rounded-md hover:bg-primary/20 text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-10 text-center bg-transparent border-none focus:ring-0 font-bold text-slate-900 dark:text-slate-100" readonly="" type="number" value="1"/>
+<button class="h-8 w-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<p class="text-xl font-black text-primary">$299.00</p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="glass-effect rounded-xl p-4 md:p-6 flex flex-col md:flex-row gap-6 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-32 border border-primary/10" data-alt="Minimalist adjustable matte black desk lamp" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5tSNdLFRTXvT3WdCyiihDjLfLH3GLIwdmxK1WJTz8KGQgXmqvX-e2IdAyyWiqYS72QpejgyKkvEq8qM40sKTyHdnsvi7xp-VxQZ0tLAVotLTS6Kac5n6Bmr801xkBeIr-2uyf2DckF3dHDHrmkz0lGJypnLTfxXTZsERkzyGk1wvhOmYoiLH4EuzHkbrla1vdVD41V5Q0FocujHyoSNsyDrSgzywglN37Iu3JJG3fAIeMGMRQhCniaR9Bj2GjlysNLFMiW4geHQ");'></div>
+<div class="flex-1 w-full">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-snug">Minimalist Desk Lamp</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Matte Black | Adjustable Arm</p>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex items-center gap-1 bg-primary/5 dark:bg-primary/10 rounded-lg p-1 border border-primary/10">
+<button class="h-8 w-8 flex items-center justify-center rounded-md hover:bg-primary/20 text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-10 text-center bg-transparent border-none focus:ring-0 font-bold text-slate-900 dark:text-slate-100" readonly="" type="number" value="2"/>
+<button class="h-8 w-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-primary">$178.00</p>
+<p class="text-xs text-slate-400">$89.00 each</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="glass-effect rounded-xl p-4 md:p-6 flex flex-col md:flex-row gap-6 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-32 border border-primary/10" data-alt="Modern tablet with stylus" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCEZ63HP-PxzD1qcMr_mZ8m5itWKrjEv8pm01UjCd72ZLrOGidb7_beyM4jRq9520AMEPC7qCPo8LmWXKXP1MrzwGv6u1iwa957wCr2IIMSI-Ww3cQDr91RD1V0AOKP4Xrr1JYNwGUcnc4WiJxaafjlUm15Sr4kLZtoQW5ncMpKF6JYoGAcQ3idubgRjmpLOnX04vcMdUxkr89yu5n8xWUB-hksBTWHbMwMDHHuUEz-MsSxhfd1ZeL8seHBdkKcgOfMUsFj7c6JcQ");'></div>
+<div class="flex-1 w-full">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-snug">Pro Tablet 11"</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">256GB | Silver | Wi-Fi</p>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex items-center gap-1 bg-primary/5 dark:bg-primary/10 rounded-lg p-1 border border-primary/10">
+<button class="h-8 w-8 flex items-center justify-center rounded-md hover:bg-primary/20 text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-10 text-center bg-transparent border-none focus:ring-0 font-bold text-slate-900 dark:text-slate-100" readonly="" type="number" value="1"/>
+<button class="h-8 w-8 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<p class="text-xl font-black text-primary">$799.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Summary Sidebar -->
+<aside class="w-full lg:w-[400px]">
+<div class="glass-effect rounded-2xl p-6 lg:p-8 sticky top-24 border border-primary/20">
+<h2 class="text-xl font-bold mb-6 text-slate-900 dark:text-slate-100">Order Summary</h2>
+<div class="space-y-4 mb-6 pb-6 border-b border-primary/10">
+<div class="flex justify-between text-slate-600 dark:text-slate-400">
+<span>Subtotal</span>
+<span class="font-medium text-slate-900 dark:text-slate-100">$1,276.00</span>
+</div>
+<div class="flex justify-between text-slate-600 dark:text-slate-400">
+<span>Estimated Shipping</span>
+<span class="font-medium text-primary">FREE</span>
+</div>
+<div class="flex justify-between text-slate-600 dark:text-slate-400">
+<span>Estimated Tax</span>
+<span class="font-medium text-slate-900 dark:text-slate-100">$102.08</span>
+</div>
+</div>
+<div class="flex justify-between items-end mb-8">
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold">Total</p>
+<p class="text-4xl font-black text-slate-900 dark:text-slate-100">$1,378.08</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="relative group">
+<input class="w-full bg-primary/5 border border-primary/20 rounded-xl px-4 py-3 text-sm focus:ring-primary focus:border-primary" placeholder="Promo code" type="text"/>
+<button class="absolute right-2 top-1.5 px-3 py-1.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold rounded-lg">Apply</button>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-xl shadow-primary/20 transition-all flex items-center justify-center gap-2 group">
+                                Proceed to Checkout
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="text-center text-xs text-slate-400 dark:text-slate-500 px-4">
+                                Shipping, taxes, and discounts will be calculated during the final checkout step.
+                            </p>
+</div>
+<div class="mt-8 flex justify-center gap-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+<span class="material-symbols-outlined text-3xl">credit_card</span>
+<span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+<span class="material-symbols-outlined text-3xl">contactless</span>
+</div>
+</div>
+<div class="mt-6 p-4 rounded-xl bg-primary/5 dark:bg-primary/10 border border-primary/10 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<div>
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">Secure Payment Guaranteed</p>
+<p class="text-[10px] text-slate-500 dark:text-slate-400">Your data is protected by industry-standard SSL encryption.</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Related Items Section -->
+<section class="px-4 md:px-10 lg:px-40 py-16 bg-primary/5">
+<h2 class="text-2xl font-bold mb-8 text-slate-900 dark:text-slate-100">You might also like</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Related 1 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-primary/10 group cursor-pointer hover:shadow-xl transition-all">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl mb-4 group-hover:scale-105 transition-transform" data-alt="Elegant smart watch with white band" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB3f_HkfiVCgFGy7xl6QLTycc1Vb75W4os5FGnCUpzu3Psr2cGxxbcQDtflv6r1-OcBmEdVgbix_IwXN7s74G-WIq5UFGrdw-4xfUOYhr1k080IyRrhL8-cYJAc2zOSeF4dsgHKv8RkP1YGo4KGznuXBzQjWdz7YQ9orOS5pMlaAWwxni1hOuzudS0qvXXSknsZHUEz-BdjI3Ci3l0wcnqvTljumUb2Vmocf7sl99NIEIuh3Ri4H2hx-zSzyigBqRIjllsea_1t2g");'></div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 truncate">Sleek Smart Watch</h4>
+<p class="text-primary font-black mt-1">$199.00</p>
+<button class="mt-4 w-full py-2 bg-primary/10 text-primary font-bold rounded-lg text-sm hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
+</div>
+<!-- Related 2 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-primary/10 group cursor-pointer hover:shadow-xl transition-all">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl mb-4 group-hover:scale-105 transition-transform" data-alt="High resolution ergonomic computer monitor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdwPojCgkI2e0imQ0VVIZvwFwRAkGhUcjp4Qt1muR-jxN62dS4BHl2UxREAnxmHhLpSS9nU0ZRGwNwYX5sG8nQLbBXQrSaeu-uzzvDoHRVdlWFTc1t7dck3Ds-KqyN8217hU1p0-qrXo3GUqXa9jqerGDCk7xDHfHnJzyQw_rGEJ9YxKKhSACJWexjkX4rtWW42PlEBor01X1619jjFAVBh_oBkxBXGcePxN6fLjfBpxApW1_hMDlR3yO3kF6vIu0NjN91MvHiPA");'></div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 truncate">4K Studio Monitor</h4>
+<p class="text-primary font-black mt-1">$549.00</p>
+<button class="mt-4 w-full py-2 bg-primary/10 text-primary font-bold rounded-lg text-sm hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
+</div>
+<!-- Related 3 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-primary/10 group cursor-pointer hover:shadow-xl transition-all">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl mb-4 group-hover:scale-105 transition-transform" data-alt="Wireless ergonomic computer mouse" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCuU6B5r5PV8E3qILk8TufhEK7FykgEejjPEqeLAoE_tuHpMe11Bwn4lAQ3hBXcGngx07wlJyXrIaxY3dJS_m7Bkm6ezbIv13Flfj44vO4OqLhLWfh8KCKOO5xB29HJ3YxGZK2fWKzHaXoHKHC2jeQghGaFVZi0H1I79igIPrLnada1wdh_wE1JkdYjCE7v4dsGhaMlJydU0T1vqBuW0TvqFhlHojqUQOLuR77OVCUoMygnq1vsGPzJPWRN1-Buy8vKJTqNrLhLuQ");'></div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 truncate">Precision Mouse</h4>
+<p class="text-primary font-black mt-1">$79.00</p>
+<button class="mt-4 w-full py-2 bg-primary/10 text-primary font-bold rounded-lg text-sm hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
+</div>
+<!-- Related 4 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-primary/10 group cursor-pointer hover:shadow-xl transition-all">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl mb-4 group-hover:scale-105 transition-transform" data-alt="Sleek aluminum laptop stand" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAeMpmHKIkVjnN68bK4wv2FW35iQEP6qNXZfwL0HT9_EoRJE_qH1UgrFB7XQ2qUgSDzGnDM2ToaeyNwMKAdl5aMeP-_mEbvKrmHPqJxfajldi5-iPDPcrcAuKLdsFQgPgc9xJbKwMdjgF7CUDDtVidTamIfHvoZakhtpBePxFJBnfUbGDDuk2p_yfO1PgNG7PukoKL5L6ey4ytsAxxEvjtCxVNoVeGUnVsiSRQDhrtz5dRoipYJgp2QsNLC3E3OEuMrlQPOquZ8sA");'></div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 truncate">Aluminum Laptop Stand</h4>
+<p class="text-primary font-black mt-1">$45.00</p>
+<button class="mt-4 w-full py-2 bg-primary/10 text-primary font-bold rounded-lg text-sm hover:bg-primary hover:text-white transition-colors">Add to Cart</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-background-light dark:bg-background-dark border-t border-primary/10 py-12 px-4 md:px-10 lg:px-40">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-2xl font-bold">shopping_bag</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Stuffus</h2>
+</div>
+<div class="flex gap-8 text-sm font-medium text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+<a class="hover:text-primary" href="#">Shipping Info</a>
+<a class="hover:text-primary" href="#">Contact Us</a>
+</div>
+<div class="text-xs text-slate-400">
+                    © 2024 Stuffus Inc. All rights reserved.
+                </div>
+</div>
+</footer>
+</div>
+</body></html>
+
+<!-- Checkout - Desktop -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout - Stuffus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Public Sans", sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="layout-container flex flex-col items-center">
+<!-- Header -->
+<header class="w-full max-w-[1200px] flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-6 py-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl">star_rate</span>
+<h2 class="text-xl font-bold tracking-tight">Stuffus</h2>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Categories</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Offers</a>
+</nav>
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4gVpDY0t4Hg1bmxI2PRdj3ZXsmhZS-Nt5-xNCBLDWt1QtlsYEGNO1ms0z4TY3ZIWLezmsKN-fDi69Guf6zdhhS6Z0IrmGDcrcZgY3eNPTbPk2jxPZGpQXXsQ-4ZnPYKZ_xNTeTDTS7MFF9xamtbWXRQqn18tQhS0iBPriK92Hmb1iS8B345cslz1ASis6fONAulIou3S2GwGeMZ-auxuS7WwCvQ_fcSFOSrgVhXF3cQQmUBqZem-CUWfaqoszpwx5VxtDRCsmng"/>
+</div>
+</div>
+</header>
+<main class="w-full max-w-[960px] px-6 py-10">
+<!-- Progress Stepper -->
+<div class="mb-10">
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-2">
+<span class="text-primary font-bold">Shipping</span>
+<span class="material-symbols-outlined text-slate-400 text-sm">chevron_right</span>
+<span class="text-slate-400">Review</span>
+<span class="material-symbols-outlined text-slate-400 text-sm">chevron_right</span>
+<span class="text-slate-400">Payment</span>
+</div>
+<span class="text-sm font-medium text-primary">Step 1 of 3</span>
+</div>
+<div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/3 transition-all"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<!-- Main Form Column -->
+<div class="lg:col-span-2 space-y-8">
+<section>
+<h1 class="text-3xl font-bold mb-2">Shipping Information</h1>
+<p class="text-slate-500 dark:text-slate-400 mb-8">Enter your delivery details to proceed with the order.</p>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">First Name</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="John" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">Last Name</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="Doe" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">Email Address</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="john.doe@example.com" type="email"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">Street Address</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="123 Main Street" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">City</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="Lagos" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">State</label>
+<select class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary">
+<option>Lagos</option>
+<option>Abuja</option>
+<option>Rivers</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold">Postal Code</label>
+<input class="w-full h-12 rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:border-primary focus:ring-primary" placeholder="100001" type="text"/>
+</div>
+</div>
+<div class="pt-6">
+<button class="w-full md:w-auto px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2" type="button">
+                                    Proceed to Review
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</form>
+</section>
+</div>
+<!-- Order Summary Sidebar -->
+<div class="lg:col-span-1">
+<div class="bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sticky top-8">
+<h3 class="text-lg font-bold mb-6">Order Summary</h3>
+<div class="space-y-4 mb-6">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Red Nike running shoes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdRof0Z4HFmy1P8a1GXcpJhx1RdlnskmiLTcoyx9w0H-iDKT2JYO7zNTTcWn-luUqXbXe5fobamEmfxIZgsFzs9wsIiUk-WqJc6xwz0cMiZRdW41foT5bhv3RoSzhiH08fS_s8F1lKKk0CAE43J-StDOcMsaQjd9RNKMYCnCYQs-MGa1SykD-2wIffnEnYHBtBQarN_hVC5rBdiobMcb6E4U0rsoAELEEdjianb2hJBLj5nudRRDln84jbizL9TENS5NcohyULXw"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Stuffus Air Max</p>
+<p class="text-xs text-slate-500">Size: 42 | Color: Red</p>
+<p class="text-sm font-bold mt-1">₦45,000</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Minimalist wrist watch white dial" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkhEHuwLNjEG5HjUSAErzg2xz3R7dEg2k1mPr61y7E0quQX3rUuB3vT-5SyDTUGQj2jmbxRd7mC0htQ7N4eF6es7iZPttasSrtSje8awUvY4_5CdugGyPYlYa0Kidk_k_NOkI10jIk5AKCm8t6ldvzcXn6XMEcJwK-tBDOZKuFIiN-wtj3rQP6r817ctF23x_dMgfmNl_pgFLLJmqMiQCrMeYMZ14-pvdMxr7Z-oBaBBLAlprmcC2i6diqxGbk17kwuHNcEiM7cQ"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Stuffus Classic Watch</p>
+<p class="text-xs text-slate-500">Edition: Midnight</p>
+<p class="text-sm font-bold mt-1">₦22,500</p>
+</div>
+</div>
+</div>
+<hr class="border-slate-200 dark:border-slate-800 mb-6"/>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Subtotal</span>
+<span>₦67,500</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Shipping</span>
+<span class="text-green-600">Free</span>
+</div>
+<div class="flex justify-between text-lg font-bold pt-3 border-t border-slate-100 dark:border-slate-800">
+<span>Total</span>
+<span>₦67,500</span>
+</div>
+</div>
+<!-- Paystack Integration Mention -->
+<div class="bg-primary/5 dark:bg-primary/10 rounded-lg p-4 border border-primary/20 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">lock</span>
+<div class="text-xs">
+<p class="font-bold text-primary">Secure Checkout</p>
+<p class="text-slate-600 dark:text-slate-400">Powered by <strong>Paystack</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Info -->
+<footer class="w-full max-w-[960px] px-6 py-8 mt-10 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-slate-500">© 2024 Stuffus Inc. All rights reserved.</p>
+<div class="flex items-center gap-6">
+<a class="text-xs text-slate-500 hover:underline" href="#">Terms of Service</a>
+<a class="text-xs text-slate-500 hover:underline" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-500 hover:underline" href="#">Help Center</a>
+</div>
+</footer>
+</div>
+</body></html>
+
+<!-- User Dashboard - Desktop -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stuffus | User Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-primary/20 flex flex-col bg-white dark:bg-background-dark">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-xl p-2">
+<span class="material-symbols-outlined text-white">deployed_code</span>
+</div>
+<h1 class="text-xl font-black tracking-tight text-primary">Stuffus</h1>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<div class="p-3">
+<p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Main Menu</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">person</span>
+<span>Account</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">package_2</span>
+<span>Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span>Wishlist</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">location_on</span>
+<span>Addresses</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-100 dark:border-primary/10">
+<div class="flex items-center gap-3 p-2">
+<div class="size-10 rounded-full bg-primary/20 overflow-hidden">
+<img alt="Alex profile" data-alt="User profile avatar smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpdyu2MNz1zZmvarwDBlPVMdOdeG7S-6mzIL8l5-uxKopsrjrZYMliYktjAzigKmSlet9d3kXB9YvEUyhzv-8zMu03T-xebj9xnUOPx-n9YjWn0t8WuFBZjJwEjF2DXAvLqyQwPaZekOAgm1PEMaqp8CXnYNwrUcwKBjWvDcFsM1NSwGYaZ_8pJFdFakOoqeYsi7WpFyTS1nTg8fTcXEvrqq3S7uPR3VJXPIKC47-b3nyOOMahxlXmnUxHoMA4R_rMqkdnD6paBw"/>
+</div>
+<div class="flex flex-col">
+<p class="text-sm font-bold">Alex Johnson</p>
+<p class="text-xs text-slate-500">Premium Member</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-screen overflow-y-auto">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-primary/20 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-primary/5 border-none rounded-xl focus:ring-2 focus:ring-primary/50 text-sm" placeholder="Search orders or products..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-xl bg-slate-100 dark:bg-primary/5 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full border-2 border-white dark:border-background-dark"></span>
+</button>
+<button class="p-2 rounded-xl bg-slate-100 dark:bg-primary/5 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Welcome Section -->
+<div>
+<h2 class="text-3xl font-black tracking-tight">Welcome back, Alex!</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">You have one order arriving today.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Order Tracking -->
+<div class="lg:col-span-2 space-y-6">
+<section class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+                                    Active Order Tracking
+                                </h3>
+<span class="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">#ORD-882190</span>
+</div>
+<div class="relative">
+<!-- Horizontal Line for Desktop View (Hidden on mobile) -->
+<div class="absolute top-5 left-8 right-8 h-0.5 bg-slate-100 dark:bg-primary/20 -z-0"></div>
+<div class="grid grid-cols-4 relative z-10">
+<div class="flex flex-col items-center text-center space-y-2">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<p class="text-sm font-bold">Placed</p>
+<p class="text-xs text-slate-500">Oct 24, 10:00 AM</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-2">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center">
+<span class="material-symbols-outlined">inventory</span>
+</div>
+<div>
+<p class="text-sm font-bold">Processed</p>
+<p class="text-xs text-slate-500">Oct 24, 2:30 PM</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-2">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center ring-4 ring-primary/20">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div>
+<p class="text-sm font-bold">Shipped</p>
+<p class="text-xs text-slate-500">Oct 25, 09:15 AM</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-2 opacity-50">
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 flex items-center justify-center">
+<span class="material-symbols-outlined">home</span>
+</div>
+<div>
+<p class="text-sm font-bold">Delivered</p>
+<p class="text-xs text-slate-500">Expected Today</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Wishlist Grid -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold">Your Wishlist</h3>
+<button class="text-sm font-semibold text-primary hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-xl p-4 flex gap-4 hover:shadow-md transition-shadow">
+<div class="size-24 rounded-lg bg-slate-100 dark:bg-primary/10 overflow-hidden flex-shrink-0">
+<img alt="Headphones" data-alt="High quality overhead wireless headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpRazp1exuBjeuG8_9Acv4kmGkEV5sHGniuULWdZIhv4RXyP18m5ta8LFcjpOS3zDhDTkh_2OeFnQzCvf162874PWJ10CKBtWh1npCKH73DtFuhJEZBmgNDE0GQ_AW_qFzZ_Q8cOZaaWzVbHgdx3ueGY13Enas0opGeXJ98oNKAwJx9-fg-qP1xk1w41vN9XqS2yGLFXPyR6nT3KpOhKTU1rsjqUEimbHauEoOfeTKdUcd-ShrXZH02iROZC4RVGsYPNENxjv3AQ"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-bold text-sm">Acoustic Pro Wireless</h4>
+<p class="text-primary font-black mt-1">$299.00</p>
+</div>
+<button class="flex items-center gap-2 text-xs font-bold bg-primary text-white px-3 py-1.5 rounded-lg w-fit">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+                                            Add to Cart
+                                        </button>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-xl p-4 flex gap-4 hover:shadow-md transition-shadow">
+<div class="size-24 rounded-lg bg-slate-100 dark:bg-primary/10 overflow-hidden flex-shrink-0">
+<img alt="Watch" data-alt="Modern minimalist white wrist watch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQE-WZcg7iYrxlDl8V-ldxYVFBUPDW-hKm8VC8bxXkKk7xN0Dp9WytGNmhHZAIZSt28DOpNDcJsnyA7m5DcjR3Dck2yMbJxgOEHNF6GBaBDlr8SDrMrEQPfDYD010XWe3GxWtITB1Z0wJ8o5nMi2A4Q8JuzQgCTEC2xk5dhcnYE48_-f3RW0CrQCn2hbK2t98H7uBl_I_FUU9OChiYKXsdBF8TyrI4Te-ZV9lnJejuQf2MYNm_mc0vFKegRbuIi8l0SNKGniwJDg"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-bold text-sm">Modernist Timepiece</h4>
+<p class="text-primary font-black mt-1">$145.00</p>
+</div>
+<button class="flex items-center gap-2 text-xs font-bold bg-primary text-white px-3 py-1.5 rounded-lg w-fit">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+                                            Add to Cart
+                                        </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Address Management -->
+<div class="space-y-6">
+<section class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-xl p-6 shadow-sm">
+<h3 class="text-lg font-bold flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                                Primary Address
+                            </h3>
+<div class="space-y-4">
+<div class="p-4 rounded-xl border-2 border-primary bg-primary/5 relative">
+<span class="absolute top-4 right-4 text-primary material-symbols-outlined">verified</span>
+<p class="text-xs font-bold text-primary uppercase tracking-wider mb-2">Default Billing &amp; Shipping</p>
+<p class="font-bold">Alex Johnson</p>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                                        123 Innovation Drive<br/>
+                                        Suite 400, Tech Valley<br/>
+                                        San Francisco, CA 94105<br/>
+                                        United States
+                                    </p>
+<button class="mt-4 text-sm font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">edit</span>
+                                        Edit Address
+                                    </button>
+</div>
+<button class="w-full py-4 border-2 border-dashed border-slate-200 dark:border-primary/20 rounded-xl text-slate-400 hover:border-primary hover:text-primary transition-all flex flex-col items-center gap-1 group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">add_location</span>
+<span class="text-xs font-bold uppercase">Add New Address</span>
+</button>
+</div>
+</section>
+<!-- Quick Map Preview -->
+<section class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-xl overflow-hidden shadow-sm">
+<div class="h-32 bg-slate-200 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Stylized map showing San Francisco area" data-location="San Francisco" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDHIR6QtHEzqSn8QH16bEuYYct93akdjrYVCnGlu6SO2vMhYTcDT_ITvFQRYuS7bx0yB1oJnU0wUcgakq6egZ-vDwY9QumJofi10Im6g6M92hrZMplSY5uXgPOpF6ZSO-GmsSDOZtS124ztI6Jm6wCnAz2_aWZNGJPyyd5KDUkw_Y4gwym7GJAngdynx4trWlQcEYmhRrFrrgl01YZhARBnOirYk44LsacwtZZGyqu869mXLWdpeZa3FRxUwEKQRCg-8JsGY5uJcQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute bottom-2 left-3 flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-sm">map</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Delivery Zone B</span>
+</div>
+</div>
+<div class="p-4">
+<p class="text-xs text-slate-500 leading-tight">Your primary address is within our <strong>Same-Day Delivery</strong> zone.</p>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -16,7 +16,7 @@ export function useCart() {
     enabled: isSignedIn,
     retry: false, // Don't retry if 401/404, just show empty
     select: (data) => {
-      const cart = data?.cart || data?.cartItems || [];
+      const cart = data?.cart || [];
       return (Array.isArray(cart) ? cart : []) as CartItem[];
     },
   });

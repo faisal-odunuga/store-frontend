@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import BackButton from '@/components/ui/back-button';
 import RequireCustomer from '@/components/auth/require-customer';
+import AutoBreadcrumb from '@/components/ui/auto-breadcrumb';
 
 export default function OrdersPage() {
   const {
@@ -41,7 +42,8 @@ export default function OrdersPage() {
   return (
     <RequireCustomer>
       <div className='container mx-auto px-4 py-8'>
-        <BackButton className='mb-4' />
+        <AutoBreadcrumb className='mb-6' />
+
         <h1 className='text-2xl font-bold mb-6'>My Orders</h1>
 
         {orders.length === 0 ? (
@@ -66,7 +68,7 @@ export default function OrdersPage() {
                   <div className='border rounded-lg p-3 bg-card group-hover:shadow-md transition-all group-hover:border-primary/50 flex gap-4 items-start'>
                     <div className='shrink-0 w-24 h-24 bg-secondary/10 rounded-md overflow-hidden border relative'>
                       <img
-                        src={firstItem?.imageUrl || '/placeholder.png'}
+                        src={firstItem?.images?.[0] || '/placeholder.png'}
                         alt={firstItem?.name || 'Order'}
                         className='w-full h-full object-cover'
                       />

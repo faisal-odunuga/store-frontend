@@ -11,6 +11,8 @@ import BackButton from '@/components/ui/back-button';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import RequireCustomer from '@/components/auth/require-customer';
+import Image from 'next/image';
+import AutoBreadcrumb from '@/components/ui/auto-breadcrumb';
 
 export default function OrderDetailsClient() {
   const params = useParams();
@@ -49,7 +51,7 @@ export default function OrderDetailsClient() {
   return (
     <RequireCustomer>
       <div className='container mx-auto px-4 py-4'>
-        <BackButton className='mb-2' />
+        <AutoBreadcrumb className='mb-6' />
 
         <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8'>
           <div className='min-w-0'>
@@ -79,11 +81,12 @@ export default function OrderDetailsClient() {
                   {order.orderItems && order.orderItems.length > 0 ? (
                     order.orderItems.map((item: any, index: number) => (
                       <div key={index} className='flex gap-4'>
-                        <div className='h-20 w-20 rounded-md overflow-hidden bg-secondary/10 shrink-0 border'>
-                          <img
-                            src={item.product?.imageUrl || '/placeholder.png'}
+                        <div className='h-20 w-20 rounded-md overflow-hidden bg-secondary/10 shrink-0 border relative'>
+                          <Image
+                            src={item.product?.images?.[0] || '/placeholder.png'}
                             alt={item.product?.name || 'Product'}
                             className='h-full w-full object-cover'
+                            fill
                           />
                         </div>
                         <div className='flex-1'>
@@ -154,11 +157,15 @@ export default function OrderDetailsClient() {
                 <div className='space-y-2 text-sm'>
                   <div>
                     <span className='font-medium block'>Name</span>
-                    <span className='text-muted-foreground'>{order.user?.name || 'N/A'}</span>
+                    <span className='text-muted-foreground'>
+                      {order.contactName || order.user?.name || 'N/A'}
+                    </span>
                   </div>
                   <div>
                     <span className='font-medium block'>Email</span>
-                    <span className='text-muted-foreground'>{order.user?.email || 'N/A'}</span>
+                    <span className='text-muted-foreground'>
+                      {order.contactEmail || order.user?.email || 'N/A'}
+                    </span>
                   </div>
                   {order.shippingAddress && (
                     <div>

@@ -1,128 +1,148 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import apiService from '@/lib/apiService';
-import ProductCard from '@/components/ui/product-card';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, Sparkles, Zap, ShieldCheck } from 'lucide-react';
-import { Product } from '@/lib/definitions';
+
+import ProductCard from '@/components/ui/product-card';
+import { Button } from '@/components/ui/button';
+import { categories as fallbackCategories } from '@/lib/products';
+import { useFeaturedProducts } from '@/hooks/useProducts';
 
 export default function Home() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['products'],
-    queryFn: () => apiService.product.getAll({ limit: 8 }),
-  });
-
-  const products = (data?.products || []) as Product[];
-
   return (
-    <main className='min-h-screen bg-background'>
-      {/* Hero Section */}
-      <section className='relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-background pt-24 pb-32 lg:pt-40 lg:pb-52'>
-        <div className='container mx-auto px-4 md:px-6 relative z-10'>
-          <div className='flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto'>
-            <div className='inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-secondary text-secondary-foreground hover:bg-secondary/80'>
-              <span className='flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse'></span>
-              New Arrivals Available Now
+    <main className='min-h-screen bg-gradient-to-b from-background via-background to-muted/30'>
+      <Hero />
+      <FeaturedCategories />
+      <FeaturedProducts />
+    </main>
+  );
+}
+
+function Hero() {
+  return (
+    <section className='relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-background pt-20 pb-24 lg:pt-28 lg:pb-28'>
+      <div className='container mx-auto px-4 md:px-8 relative z-10'>
+        <div className='grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center'>
+          <div className='space-y-6'>
+            <div className='inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold bg-secondary text-secondary-foreground'>
+              <span className='flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse' />
+              Boutique Tech • Curated Daily
             </div>
-            <h1 className='text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 animate-in fade-in slide-in-from-bottom-4 duration-1000'>
-              Next-Gen Electronics <br /> for the Modern Home
+            <h1 className='text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight'>
+              Premium Audio &amp; Electronics, <br />
+              Crafted for Obsessives.
             </h1>
-            <p className='max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200'>
-              Experience the future today. Discover our curated collection of premium gadgets, smart
-              home devices, and cutting-edge accessories.
+            <p className='text-base md:text-lg text-muted-foreground max-w-xl'>
+              Discover reference-grade headphones, studio monitors, and limited-run amplifiers from
+              the world&apos;s most respected makers.
             </p>
-            <div className='flex flex-col sm:flex-row gap-4 min-w-[200px] animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300'>
+            <div className='flex flex-col sm:flex-row gap-3'>
               <Button size='lg' className='h-12 px-8 text-lg' asChild>
                 <Link href='/products'>
-                  Shop Now <ArrowRight className='ml-2 h-5 w-5' />
+                  Shop Collection <ArrowRight className='ml-2 h-5 w-5' />
                 </Link>
               </Button>
-              <Button size='lg' variant='outline' className='h-12 px-8 text-lg' asChild>
-                <Link href='#features'>Learn More</Link>
-              </Button>
+            </div>
+            <div className='grid grid-cols-3 max-w-lg gap-4 pt-4'>
+              {[
+                { label: 'Delivery', value: 'Express 48h' },
+                { label: 'Warranty', value: '2 Years' },
+                { label: 'Verified', value: 'Authorized Stock' },
+              ].map((item) => (
+                <div key={item.label} className='rounded-xl bg-card border p-4 shadow-sm'>
+                  <p className='text-xs text-muted-foreground uppercase tracking-widest mb-1'>
+                    {item.label}
+                  </p>
+                  <p className='font-semibold'>{item.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className='relative'>
+            <div className='aspect-square rounded-[32px] overflow-hidden border bg-card shadow-2xl'>
+              <img
+                src='https://images.unsplash.com/photo-1524678714210-9917a6c619c4?auto=format&fit=crop&w=1200&q=80'
+                alt='Hero headphones'
+                className='w-full h-full object-cover'
+              />
+            </div>
+            <div className='absolute -left-6 -bottom-6 bg-primary text-primary-foreground px-4 py-3 rounded-2xl shadow-lg flex items-center gap-3'>
+              <Sparkles className='h-5 w-5' />
+              <div>
+                <p className='text-xs uppercase tracking-widest'>New Drop</p>
+                <p className='font-semibold text-sm'>Limited Studio Series</p>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className='absolute top-0 left-0 w-full h-full pointer-events-none opacity-30'>
+        <div className='absolute -left-32 top-10 h-72 w-72 bg-primary/20 blur-3xl rounded-full' />
+        <div className='absolute right-10 bottom-0 h-64 w-64 bg-secondary/20 blur-3xl rounded-full' />
+      </div>
+    </section>
+  );
+}
 
-        {/* Background Decorative Elements */}
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-30 pointer-events-none'>
-          <div className='absolute inset-0 bg-gradient-to-tr from-primary/30 to-purple-500/30 rounded-full blur-3xl animate-pulse'></div>
+function FeaturedCategories() {
+  return (
+    <section className='container mx-auto px-4 md:px-8 py-10 space-y-4'>
+      <div className='flex items-center justify-between'>
+        <div>
+          <p className='text-sm text-muted-foreground uppercase tracking-widest'>Explore</p>
+          <h2 className='text-2xl font-bold'>Popular Categories</h2>
         </div>
-      </section>
-
-      {/* Features Section */}
-      <section id='features' className='py-20 bg-muted/30'>
-        <div className='container mx-auto px-4 md:px-6'>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-            <div className='flex flex-col items-center text-center p-6 bg-card rounded-2xl shadow-sm border hover:shadow-md transition-shadow'>
-              <div className='h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 text-primary'>
-                <Sparkles className='h-6 w-6' />
-              </div>
-              <h3 className='font-bold text-xl mb-2'>Premium Quality</h3>
-              <p className='text-muted-foreground'>
-                Curated selection of top-tier brands and verified authentic products.
-              </p>
-            </div>
-            <div className='flex flex-col items-center text-center p-6 bg-card rounded-2xl shadow-sm border hover:shadow-md transition-shadow'>
-              <div className='h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 text-primary'>
-                <Zap className='h-6 w-6' />
-              </div>
-              <h3 className='font-bold text-xl mb-2'>Fast Delivery</h3>
-              <p className='text-muted-foreground'>
-                Lightning fast shipping to get your gadgets to you when you need them.
-              </p>
-            </div>
-            <div className='flex flex-col items-center text-center p-6 bg-card rounded-2xl shadow-sm border hover:shadow-md transition-shadow'>
-              <div className='h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 text-primary'>
-                <ShieldCheck className='h-6 w-6' />
-              </div>
-              <h3 className='font-bold text-xl mb-2'>Secure Warranty</h3>
-              <p className='text-muted-foreground'>
-                All products come with comprehensive warranty and support coverage.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Listing */}
-      <section className='py-24 container mx-auto px-4 md:px-6'>
-        <div className='flex flex-col md:flex-row items-center justify-between mb-12 gap-4'>
-          <div>
-            <h2 className='text-3xl font-bold tracking-tight mb-2'>Featured Products</h2>
-            <p className='text-muted-foreground'>Hand-picked selections just for you.</p>
-          </div>
-          <Button variant='ghost' asChild>
-            <Link href='/products' className='group'>
-              View All
-              <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+        <Button asChild variant='outline'>
+          <Link href='/products'>Browse all products</Link>
+        </Button>
+      </div>
+      <div className='flex flex-wrap gap-2'>
+        {fallbackCategories
+          .filter((c) => c !== 'All Categories')
+          .slice(0, 8)
+          .map((cat) => (
+            <Link
+              key={cat}
+              href={`/products?category=${encodeURIComponent(cat)}`}
+              className='px-3 py-2 rounded-full border bg-card hover:bg-primary/10 text-sm'
+            >
+              {cat}
             </Link>
-          </Button>
-        </div>
+          ))}
+      </div>
+    </section>
+  );
+}
 
-        {isLoading ? (
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className='h-[300px] rounded-xl bg-muted animate-pulse' />
-            ))}
-          </div>
-        ) : error ? (
-          <div className='text-center py-20 bg-muted/20 rounded-xl'>
-            <p className='text-destructive mb-4'>Failed to load products</p>
-            <Button variant='outline' onClick={() => window.location.reload()}>
-              Try Again
-            </Button>
-          </div>
-        ) : (
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        )}
-      </section>
-    </main>
+function FeaturedProducts() {
+  const { data, isLoading } = useFeaturedProducts(10);
+  const products = data?.products ?? [];
+
+  return (
+    <section className='container mx-auto px-4 md:px-8 pb-16 space-y-6'>
+      <div className='flex items-center justify-between'>
+        <div>
+          <p className='text-sm text-muted-foreground uppercase tracking-widest'>Featured</p>
+          <h2 className='text-3xl font-black leading-tight'>Top Picks</h2>
+        </div>
+        <Button asChild>
+          <Link href='/products'>View full catalog</Link>
+        </Button>
+      </div>
+
+      {isLoading ? (
+        <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6'>
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className='h-[320px] rounded-xl bg-muted animate-pulse' />
+          ))}
+        </div>
+      ) : (
+        <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6'>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
+    </section>
   );
 }

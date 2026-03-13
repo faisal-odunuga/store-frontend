@@ -18,6 +18,7 @@ import {
   Package,
   Settings,
   ChevronDown,
+  Heart,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -29,9 +30,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useCart } from '@/lib/cart';
 import { useClerk, useUser } from '@clerk/nextjs';
+import { useWishlist } from '@/hooks/useWishlist';
 
 const Header = () => {
   const { cart } = useCart();
+  const { wishlist } = useWishlist();
+
   const { user } = useUser();
   const { signOut } = useClerk();
 
@@ -157,16 +161,28 @@ const Header = () => {
             </Sheet>
 
             {user && (
-              <Button variant='outline' size='icon' asChild>
-                <Link href='/cart'>
-                  <ShoppingCart className='h-5 w-5' />
-                  {cart.length > 0 && (
-                    <span className='absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center'>
-                      {cart.reduce((acc, item) => acc + item.quantity, 0)}
-                    </span>
-                  )}
-                </Link>
-              </Button>
+              <div className='flex items-center gap-2'>
+                <Button variant='outline' size='icon' asChild className='relative shrink-0'>
+                  <Link href='/wishlist'>
+                    <Heart className='h-5 w-5' />
+                    {wishlist.length > 0 && (
+                      <span className='absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center'>
+                        {wishlist.length}
+                      </span>
+                    )}
+                  </Link>
+                </Button>
+                <Button variant='outline' size='icon' asChild className='relative shrink-0'>
+                  <Link href='/cart'>
+                    <ShoppingCart className='h-5 w-5' />
+                    {cart.length > 0 && (
+                      <span className='absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center'>
+                        {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                      </span>
+                    )}
+                  </Link>
+                </Button>
+              </div>
             )}
           </div>
         </div>
