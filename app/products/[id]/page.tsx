@@ -4,17 +4,15 @@ import apiService from '@/lib/apiService';
 import { extractIdFromSlug } from '@/lib/utils';
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = extractIdFromSlug(params.id);
 
   try {
     const res = await apiService.product.getById(id);
-    // console.log(res.  )
-    const product = res.product;
+    const product = res?.product;
 
     if (product) {
       return {
@@ -26,8 +24,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
           images: product.imageUrl ? [product.imageUrl] : [],
         },
       };
-    } else {
-      console.warn(`[Metadata] Product not found for ID: ${id}`);
     }
   } catch (error) {
     console.warn('[Metadata] Failed to fetch product metadata:', error);

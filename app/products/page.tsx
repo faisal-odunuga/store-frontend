@@ -80,7 +80,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className='container mx-auto px-4 py-10 space-y-10'>
+    <div className='container mx-auto px-2.5 md:px-4 py-10 space-y-10'>
       <AutoBreadcrumb />
 
       <div className='flex flex-col lg:flex-row gap-10'>
@@ -207,7 +207,7 @@ export default function ProductsPage() {
             </div>
           ) : (
             <>
-              <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6'>
+              <div className='grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-4'>
                 {products.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}

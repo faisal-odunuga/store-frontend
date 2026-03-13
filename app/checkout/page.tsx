@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { AutoBreadcrumb } from '@/components/ui/auto-breadcrumb';
+import { computeProductComputed } from '@/lib/productComputed';
 
 export default function CheckoutPage() {
   const { cart, clearCart, getTotalPrice } = useCart();
@@ -204,17 +205,12 @@ export default function CheckoutPage() {
 
                 <div className='space-y-4 max-h-[260px] overflow-y-auto pr-1'>
                   {cart.map((item) => {
-                    const price =
-                      item.product.discountPrice ?? item.product.sellingPrice ?? item.product.price;
+                    const { primaryImage, displayPrice: price } = computeProductComputed(item.product);
                     return (
                       <div key={item.id} className='flex gap-3 items-center'>
                         <div className='relative h-14 w-14 rounded-lg overflow-hidden bg-muted'>
                           <Image
-                            src={
-                              item.product.imageUrl ||
-                              item.product.images?.[0] ||
-                              '/placeholder.png'
-                            }
+                            src={primaryImage}
                             alt={item.product.name}
                             fill
                             className='object-cover'

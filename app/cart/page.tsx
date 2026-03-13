@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import BackButton from '@/components/ui/back-button';
 import RequireCustomer from '@/components/auth/require-customer';
 import { AutoBreadcrumb } from '@/components/ui/auto-breadcrumb';
+import { computeProductComputed } from '@/lib/productComputed';
 export default function CartPage() {
   const { cart, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
   const totalPrice = getTotalPrice();
@@ -43,8 +44,7 @@ export default function CartPage() {
               </div>
 
               {cart.map((item) => {
-                const price =
-                  item.product.discountPrice ?? item.product.sellingPrice ?? item.product.price;
+                const { primaryImage, displayPrice: price } = computeProductComputed(item.product);
                 return (
                   <div
                     key={item.id}
@@ -52,9 +52,7 @@ export default function CartPage() {
                   >
                     <div className='bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-28 md:size-32 border border-primary/10 relative overflow-hidden'>
                       <Image
-                        src={
-                          item.product.imageUrl || item.product.images?.[0] || '/placeholder.png'
-                        }
+                        src={primaryImage}
                         alt={item.product.name}
                         fill
                         className='object-cover'

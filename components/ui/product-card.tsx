@@ -4,56 +4,25 @@ import { Product } from '@/lib/definitions';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ShoppingCart, Plus, Minus, Heart } from 'lucide-react';
-import { useCart } from '@/lib/cart';
 import { Badge } from './badge';
-import { cn } from '@/lib/utils';
-import { useWishlist } from '@/hooks/useWishlist';
+import { useCartActions } from '@/hooks/useCartActions';
+import { useProductComputed } from '@/hooks/useProductComputed';
+import { useWishlistStatus } from '@/hooks/useWishlistStatus';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addItem, cart, updateQuantity, removeItem } = useCart();
-  const cartItem = cart.find((item) => item.product.id === product.id);
-  const { wishlist, toggleWishlist } = useWishlist();
-  const wished = wishlist.some((w) => w.productId === product.id);
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    addItem(product);
-  };
-
-  const handleIncrement = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (!cartItem) return;
-    updateQuantity(product.id, cartItem.quantity + 1);
-  };
-
-  const handleDecrement = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (!cartItem) return;
-    if (cartItem.quantity <= 1) {
-      removeItem(product.id);
-    } else {
-      updateQuantity(product.id, cartItem.quantity - 1);
-    }
-  };
-
-  const primaryImage = product.images?.[0] || product.imageUrl || '/placeholder.png';
-  const displayPrice = product.discountPrice ?? product.sellingPrice ?? product.price ?? 0;
-  const basePrice = product.sellingPrice ?? product.price ?? displayPrice;
-  const hasDiscount = product.discountPrice !== null && product.discountPrice !== undefined;
-  const lowStock = product.lowStockAlert !== undefined && product.stock <= (product.lowStockAlert || 0);
-  const isOut = product.stock <= 0;
-  const isNew =
-    product.createdAt &&
-    new Date().getTime() - new Date(product.createdAt).getTime() <
-      1000 * 60 * 60 * 24 * 30; // 30 days
+  const { cartItem, handleAddToCart, handleIncrement, handleDecrement } =
+    useCartActions(product);
+  const { primaryImage, displayPrice, basePrice, hasDiscount, isOut, isNew } =
+    useProductComputed(product);
+  const { wished, handleToggleWishlist } = useWishlistStatus(product.id);
 
   return (
     <Link href={`/products/${product.sku || product.id}`} className='group block h-full'>
-      <div className='relative h-full overflow-hidden rounded-2xl border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10'>
+      <div className='relative h-full flex flex-col gap-2 justify-between overflow-hidden rounded-2xl border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10'>
         {/* Image */}
         <div className='relative aspect-square overflow-hidden bg-muted'>
           <img
@@ -70,16 +39,17 @@ export default function ProductCard({ product }: ProductCardProps) {
                 {product.category}
               </Badge>
             )}
-            {hasDiscount && <Badge variant='destructive'>-{Math.round(((basePrice - displayPrice) / basePrice) * 100)}%</Badge>}
+            {hasDiscount && (
+              <Badge variant='destructive'>
+                -{Math.round(((basePrice - displayPrice) / basePrice) * 100)}%
+              </Badge>
+            )}
           </div>
 
           {/* Wishlist icon */}
           <button
             className='absolute top-3 right-3 rounded-full bg-white/90 p-2 shadow-sm text-muted-foreground transition hover:text-primary'
-            onClick={(e) => {
-              e.preventDefault();
-              toggleWishlist(product.id, wished);
-            }}
+            onClick={handleToggleWishlist}
             aria-label='Save to wishlist'
           >
             <Heart className={`h-4 w-4 ${wished ? 'fill-primary text-primary' : ''}`} />
@@ -101,48 +71,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Body */}
-        <div className='p-4 space-y-3'>
-          <div className='flex items-start justify-between gap-3'>
-            <div className='space-y-1 min-w-0'>
-              <h3 className='font-semibold text-base leading-tight line-clamp-2' title={product.name}>
-                {product.name}
-              </h3>
-            </div>
-            <div className='shrink-0'>
-              {cartItem ? (
-                <div className='flex items-center bg-secondary/20 rounded-full overflow-hidden border'>
-                  <Button
-                    variant='ghost'
-                    size='icon'
-                    className='h-8 w-8 rounded-none hover:bg-secondary/50'
-                    onClick={handleDecrement}
-                  >
-                    <Minus className='w-3 h-3' />
-                  </Button>
-                  <span className='px-3 text-sm font-semibold'>{cartItem.quantity}</span>
-                  <Button
-                    variant='ghost'
-                    size='icon'
-                    className='h-8 w-8 rounded-none hover:bg-secondary/50'
-                    onClick={handleIncrement}
-                  >
-                    <Plus className='w-3 h-3' />
-                  </Button>
-                </div>
-              ) : (
-                <Button
-                  size='icon'
-                  className='h-9 w-9 rounded-full shadow-sm'
-                  onClick={handleAddToCart}
-                  disabled={isOut}
-                >
-                  <ShoppingCart className='w-4 h-4' />
-                </Button>
-              )}
-            </div>
-          </div>
+        <div className='p-2 space-y-2'>
+          <h3 className='font-semibold text-sm leading-tight' title={product.name}>
+            {product.name}
+          </h3>
 
-          <p className='text-xs text-muted-foreground line-clamp-2'>{product.description}</p>
+          <p className='text-xs text-muted-foreground'>{product.description}</p>
 
           <div className='flex items-center justify-between'>
             <div className='flex items-baseline gap-2'>
@@ -153,18 +87,60 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </span>
               )}
             </div>
-            <div
+            {/* <div
               className={cn(
                 'text-xs font-semibold px-2 py-1 rounded-full',
                 isOut
                   ? 'bg-destructive/10 text-destructive'
                   : lowStock
-                  ? 'bg-amber-100 text-amber-700'
-                  : 'bg-emerald-100 text-emerald-700',
+                    ? 'bg-amber-100 text-amber-700'
+                    : 'bg-emerald-100 text-emerald-700',
               )}
             >
               {isOut ? 'Out' : lowStock ? 'Low stock' : 'In stock'}
-            </div>
+            </div> */}
+          </div>
+
+          <div className='flex items-center gap-2'>
+            <span className='text-yellow-500'>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span key={i}>★</span>
+              ))}
+            </span>
+            <span className='text-xs text-muted-foreground'>(4.1)</span>
+          </div>
+
+          <div className='flex items-center justify-between'>
+            {cartItem ? (
+              <div className='flex items-center justify-between bg-secondary/20 rounded-full overflow-hidden border w-full'>
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  className='h-8 w-8 rounded-none hover:bg-secondary/50'
+                  onClick={handleDecrement}
+                >
+                  <Minus className='w-3 h-3' />
+                </Button>
+                <span className='px-3 text-sm font-semibold'>{cartItem.quantity}</span>
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  className='h-8 w-8 rounded-none hover:bg-secondary/50'
+                  onClick={handleIncrement}
+                >
+                  <Plus className='w-3 h-3' />
+                </Button>
+              </div>
+            ) : (
+              <Button
+                size='sm'
+                className='rounded-full shadow-sm w-full'
+                onClick={handleAddToCart}
+                disabled={isOut}
+              >
+                <span className=''>Add to cart</span> <ShoppingCart className='w-4 h-4' />
+              </Button>
+            )}
           </div>
         </div>
       </div>

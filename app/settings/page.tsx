@@ -10,7 +10,7 @@ import { MapPin } from 'lucide-react';
 export default function SettingsPage() {
   return (
     <RequireCustomer>
-      <div className='container mx-auto max-w-4xl px-4 py-8 space-y-6'>
+      <div className='container mx-auto max-w-4xl px-2.5 md:px-4 py-8 space-y-6'>
         <AutoBreadcrumb />
         <div>
           <h1 className='text-3xl font-bold'>Settings</h1>

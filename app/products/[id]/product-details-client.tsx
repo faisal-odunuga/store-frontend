@@ -12,15 +12,15 @@ import BackButton from '@/components/ui/back-button';
 import { extractIdFromSlug } from '@/lib/utils';
 import SimilarProducts from '@/components/sections/similar-products';
 import { AutoBreadcrumb } from '@/components/ui/auto-breadcrumb';
-import { useWishlist } from '@/hooks/useWishlist';
 import Link from 'next/link';
+import { useWishlistStatus } from '@/hooks/useWishlistStatus';
+import { useProductComputed } from '@/hooks/useProductComputed';
 
 export default function ProductDetailsClient() {
   const params = useParams();
   const rawId = params?.id as string;
   const id = rawId ? extractIdFromSlug(rawId) : '';
   const { cart, addItem, updateQuantity, removeItem } = useCart();
-  const { wishlist, toggleWishlist } = useWishlist();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['product', id],
@@ -28,18 +28,9 @@ export default function ProductDetailsClient() {
     enabled: !!id,
   });
 
-  const product = data?.product as Product;
-  const images = product?.images?.length
-    ? product.images
-    : product?.imageUrl
-      ? [product.imageUrl]
-      : [];
-  const primaryImage = images[0] || '/placeholder.png';
-  const wished = product ? wishlist.some((w) => w.productId === product.id) : false;
-  const displayPrice = product?.discountPrice ?? product?.sellingPrice ?? product?.price ?? 0;
-  const originalPrice = product?.discountPrice
-    ? (product?.sellingPrice ?? product?.price ?? 0)
-    : null;
+  const product = data?.product as Product | undefined;
+  const { images, primaryImage, displayPrice } = useProductComputed(product);
+  const { wished, handleToggleWishlist } = useWishlistStatus(product?.id || '');
 
   if (isLoading) {
     return (
@@ -203,7 +194,8 @@ export default function ProductDetailsClient() {
                       variant='outline'
                       size='icon'
                       className='h-12 w-12'
-                      onClick={() => toggleWishlist(product.id, wished)}
+                      onClick={handleToggleWishlist}
+                      disabled={!product}
                     >
                       <Heart className={`h-5 w-5 ${wished ? 'fill-primary text-primary' : ''}`} />
                     </Button>

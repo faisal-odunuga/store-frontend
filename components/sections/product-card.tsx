@@ -5,20 +5,20 @@ import { Eye } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/lib/definitions';
+import { computeProductComputed } from '@/lib/productComputed';
 
 type ProductCardProps = {
   product: Product;
 };
 
 export function ProductCard({ product }: ProductCardProps) {
-  const displayPrice = product.discountPrice ?? product.sellingPrice ?? product.price ?? 0;
-  const originalPrice = product.discountPrice ? (product.sellingPrice ?? product.price ?? 0) : null;
+  const { displayPrice, originalPrice, primaryImage } = computeProductComputed(product);
 
   return (
     <Card className='overflow-hidden hover:shadow-lg transition-shadow'>
       <div className='relative aspect-square bg-muted'>
         <Image
-          src={product.imageUrl || '/placeholder.svg'}
+          src={primaryImage || '/placeholder.svg'}
           alt={product.name}
           fill
           className='object-cover'

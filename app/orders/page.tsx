@@ -41,7 +41,7 @@ export default function OrdersPage() {
 
   return (
     <RequireCustomer>
-      <div className='container mx-auto px-4 py-8'>
+      <div className='container mx-auto px-2.5 md:px-4 py-8'>
         <AutoBreadcrumb className='mb-6' />
 
         <h1 className='text-2xl font-bold mb-6'>My Orders</h1>
