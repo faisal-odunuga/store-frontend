@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { ShoppingCart, ShieldCheck, Truck, RotateCcw, Heart, ArrowRight, Star } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { Product } from '@/lib/definitions';
-import BackButton from '@/components/ui/back-button';
 import { extractIdFromSlug } from '@/lib/utils';
 import SimilarProducts from '@/components/sections/similar-products';
 import { AutoBreadcrumb } from '@/components/ui/auto-breadcrumb';
